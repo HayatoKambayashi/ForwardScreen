@@ -19,23 +19,21 @@ import jp.co.akkodis.shumix.dto.postDto;
 public class MainController extends HttpServlet {
 	
 	private PostDAO postDao;
-
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String link = "main.jsp";
+		// DBの指定
 		Connection conn = DriverManager.getConnection( 
 				"jdbc:mysql://localhost/db", 
 				"root",
 				"VSO@Luser234@"); 
+		// DAOのインスタンス作成
 		postDao = new PostDAO(conn);
-		
+		// pickメソッドを呼び出してランダムに1件のデータをDTOに格納
 		PostDTO data  = postDao.pick();
-		
+		// データをリクエストに送る
 		request.setAttribute("data", data);
-		
+		// データをmain.jspに送る
 		RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
 		dispatcher.forward(request, response);
 		
