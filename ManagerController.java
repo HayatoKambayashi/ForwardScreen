@@ -39,7 +39,7 @@ public class ManagerController extends HttpServlet {
 		//ユーザデータを格納するList
 		List<UserDto> userList = new ArrayList<UserDto>();	
 		
-
+		   //データベースに接続
 	       	try (Connection con = DriverManager.getConnection(url, user, password);
 	                Statement st = con.createStatement();){
 
@@ -51,7 +51,6 @@ public class ManagerController extends HttpServlet {
 	            	UserDto dto = new UserDto();
 	            	dto.setUserId(rs.getInt("userid"));
                     dto.setUserName(rs.getString("username"));
-                    dto.setKariflag(rs.getBoolean("kariflag"));
                     userList.add(dto);
 	            }
 			
@@ -59,7 +58,7 @@ public class ManagerController extends HttpServlet {
 	            e.printStackTrace();
 	        }
 	
-		 // リクエストスコープへオブジェクト設定する
+		 // ユーザ情報をセットする
 	    request.setAttribute("userList", userList);
 	    request.getRequestDispatcher("/manager.jsp").forward(request, response); // JSPへ遷移
 
@@ -72,7 +71,7 @@ public class ManagerController extends HttpServlet {
 
 	    // userId を使ってパスワード発行処理を行う
 	   
-	    //DAOのメソッドで「仮パスフラグ」を立てる
+	    //DAOのメソッドで「仮パスフラグ」を立てる(DAOを使う？)
 	    
 	    // 処理後に画面遷移やメッセージ表示など
 	    request.setAttribute("message", "ユーザー " + userId + " のパスワードを発行しました。");
