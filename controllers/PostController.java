@@ -58,7 +58,7 @@ public class PostController extends HttpServlet {
 		String jsp = "/mypage";	// sprint1では投稿フォーム確認画面にいかずマイページ画面に遷移させる。
 		
 		try{
-			if(btn != null && btn.equals("post")) {
+			if(btn != null && btn.equals("submit")) {
 				PostDto postDto = new PostDto();
 			
 				if (genreCd != null && !genreCd.isEmpty()
@@ -74,7 +74,7 @@ public class PostController extends HttpServlet {
 					
 					PostDao post = new PostDao();
 						
-					int insertCount = post.create(postDto);
+					int insertCount = post.isnert(postDto);
 					
 					if(insertCount >0 ) {
 						request.setAttribute("message", "投稿が完了しました");
@@ -91,7 +91,7 @@ public class PostController extends HttpServlet {
 			
 		}catch (NumberFormatException e) {
 			request.setAttribute("errorMessage", "入力値が不正です");
-			jsp = "/insertError.jsp";	
+			jsp = "/postError.jsp";	
 		}catch (SQLException e) {
 			request.setAttribute("errorMessage", "JDBC のエラーです");
 			e.printStackTrace();
