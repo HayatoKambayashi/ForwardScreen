@@ -52,7 +52,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<input type="hidden" name="btn" value="InsertEmp">
+						<input type="hidden" name="btn" value="post">
 						<input type="submit" value="投稿">
 					</td>
 				</tr>
