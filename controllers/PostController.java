@@ -42,7 +42,7 @@ public class PostController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String btn = request.getParameter("btn");   // どのボタンを押したかの情報
 		
-		String userIdParam = request.getParameter("userId");    //入力情報たちの取得
+		int userId = (int) request.getSession().getAttribute("userId");    //入力情報たちの取得
 		String genreCd = request.getParameter("genreCd");
 		String source = request.getParameter("source");
 		String image = request.getParameter("image");
@@ -61,13 +61,10 @@ public class PostController extends HttpServlet {
 			if(btn != null && btn.equals("post")) {
 				PostDto postDto = new PostDto();
 			
-				if (userIdParam != null && !userIdParam.isEmpty()
-					&& genreCd != null && !genreCd.isEmpty()
+				if (genreCd != null && !genreCd.isEmpty()
 					&& ((source != null && !source.isEmpty())|| 
 						(image != null && !image.isEmpty()) ||
 						(url != null && !url.isEmpty()))){
-					
-					int userId = Integer.parseInt(userIdParam);
 					
 					postDto.setUserId(userId);
 					postDto.setGenreCd(genreCd);
@@ -108,5 +105,4 @@ public class PostController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher(jsp);
 		rd.forward(request, response);
 	}
-
 }
