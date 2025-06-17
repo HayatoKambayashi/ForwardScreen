@@ -28,7 +28,7 @@ public class ManagerController extends HttpServlet {
 		
 		
 		UserDao userDao = new UserDao();
-		ArrayList<UserDto> userList = userDao.getAllGenre(); // ジャンル一覧を取得
+		ArrayList<UserDto> userList = userDao.getAllGenre(); // ユーザ一覧を取得
 		request.setAttribute("allGenreList", userList);
 		 // ユーザ情報をセットする
 	    request.setAttribute("userList", userList);
