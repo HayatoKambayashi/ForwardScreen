@@ -44,7 +44,7 @@ public class ManagerController extends HttpServlet {
 	                Statement st = con.createStatement();){
 
 	            // SQLを実行して、テーブルからユーザIDとユーザーネームを取得する（未定）
-	            ResultSet rs = st.executeQuery("SELECT * FROM usertable");
+	            ResultSet rs = st.executeQuery("SELECT userid, username FROM usertable");
 
 	            // 取得した件数分繰り返す
 	            while(rs.next()) {
