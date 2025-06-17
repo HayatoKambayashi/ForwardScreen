@@ -25,39 +25,11 @@ public class ManagerController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//データベースに接続するための情報
-		String url = "jdbc:mysql://localhost:3306/syumixDB"; //データベース名(未定）
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String user = "****"; //データベースのユーザ名
-		String password = "*****";//データベースのパスワード
 		
-		//ユーザデータを格納するList
-		List<UserDto> userList = new ArrayList<UserDto>();	
 		
-		   //データベースに接続
-	       	try (Connection con = DriverManager.getConnection(url, user, password);
-	                Statement st = con.createStatement();){
-
-	            // SQLを実行して、テーブルからユーザIDとユーザーネームを取得する（未定）
-	            ResultSet rs = st.executeQuery("SELECT userid, username FROM usertable");
-
-	            // 取得した件数分繰り返す
-	            while(rs.next()) {
-	            	UserDto dto = new UserDto();
-	            	dto.setUserId(rs.getInt("userid"));
-                    dto.setUserName(rs.getString("username"));
-                    userList.add(dto);
-	            }
-			
-	        } catch(SQLException e) {
-	            e.printStackTrace();
-	        }
-	
+		UserDao userDao = new UserDao();
+		ArrayList<UserDto> userList = userDao.getAllGenre(); // ジャンル一覧を取得
+		request.setAttribute("allGenreList", userList);
 		 // ユーザ情報をセットする
 	    request.setAttribute("userList", userList);
 	    request.getRequestDispatcher("/manager.jsp").forward(request, response); // JSPへ遷移
@@ -65,6 +37,7 @@ public class ManagerController extends HttpServlet {
 		
 		
 	}
+	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    String userId = request.getParameter("userId");
