@@ -1,0 +1,67 @@
+-- syumixデータベース作成
+create database syumixdb;
+
+-- syumixデータベースに移動
+use syumixdb;
+
+-- ユーザーテーブル作成
+CREATE TABLE user (
+	 userId      int         NOT NULL COMMENT '社員番号' AUTO_INCREMENT
+	,userName    VARCHAR(15) NOT NULL COMMENT '氏名'
+	,pass        VARCHAR(20) NOT NULL COMMENT 'パスワード' DEFAULT '0000'
+	,retiredFlag boolean     NOT NULL COMMENT '退職フラグ' DEFAULT FALSE
+	,passFlag    boolean              COMMENT '仮パス発行フラグ' DEFAULT TRUE
+	,PRIMARY KEY( userId )
+) AUTO_INCREMENT = 100000;
+
+-- 投稿テーブル作成
+CREATE TABLE post (
+	 postId    int          NOT NULL COMMENT '投稿番号' AUTO_INCREMENT
+	,userId    int          NOT NULL COMMENT '社員番号'
+	,source    VARCHAR(100)          COMMENT '投稿内容'
+	,url       VARCHAR(300)          COMMENT 'URL'
+	,genreCd   VARCHAR(4)   NOT NULL COMMENT 'ジャンルコード'
+	,image     VARCHAR(300)          COMMENT '画像'
+	,anonyFlag boolean      NOT NULL COMMENT '匿名フラグ'
+	,date      date                  COMMENT '日付' DEFAULT '2000-01-01'
+	,PRIMARY KEY( postId )
+);
+
+-- ジャンルテーブル作成
+CREATE TABLE genre (
+	 genreCd   VARCHAR(4)  NOT NULL COMMENT 'ジャンルコード'
+	,genreName VARCHAR(10) NOT NULL COMMENT 'ジャンル名'
+	,PRIMARY KEY( genreCd )
+);
+
+-- ユーザーテーブルにレコードを追加
+INSERT INTO user (userName) VALUES ('平松里彩');
+INSERT INTO user (userName) VALUES ('上林隼');
+INSERT INTO user (userName) VALUES ('矢島史生');
+INSERT INTO user (userName) VALUES ('手塚凜');
+INSERT INTO user (userName) VALUES ('松本直樹');
+INSERT INTO user (userName) VALUES ('鎌田隼');
+INSERT INTO user (userName) VALUES ('蒲原陸亜');
+
+-- 投稿テーブルにレコードを追加
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100001', 'Automatic', 'https://www.youtube.com/watch?v=-9DxpPiE458', 'm', TRUE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100002', '祝宴の夜に', '', 'bg', FALSE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100003', '吾輩は猫である', '', 'bk', FALSE);
+
+-- ジャンルテーブルにレコードを追加
+INSERT INTO genre VALUES ('m', '音楽');
+INSERT INTO genre VALUES ('bg', 'ボードゲーム');
+INSERT INTO genre VALUES ('bk', '本');
+
+
+
+// 投稿テーブルにもっとデータ追加したい場合(せっかく書いたので)
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100002', '斜陽', '', 'bk', TRUE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100006', '夜に駆ける', '', 'm', FALSE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100005', 'ラマダカタブラ', '', 'bg', FALSE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100007', 'トドメダン', '', 'bg', TRUE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100002', 'きらり', '', 'm', TRUE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100001', '海と毒薬', '', 'bk', TRUE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100006', 'クラウンソード', '', 'bg', TRUE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100006', '大きな古時計', '', 'm', FALSE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100007', 'はらぺこあおむし', '', 'bk', TRUE);
