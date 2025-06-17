@@ -131,8 +131,25 @@ public class PostDao extends Dao{
 	
 	//TODO: 以下2メソッドを要定義
 	public ArrayList<GenreDto> getAllGenre () {
+		String sql = "SELECT * FROM genre;";
 		
-		return new ArrayList<>();
+		ArrayList<GenreDto> list = new ArrayList<GenreDto>(); // resultで返却されるべきリスト
+		
+		try {
+			Statement stat = connection.createStatement();
+			ResultSet rs = stat.executeQuery(sql);
+			
+			while (rs.next()) {
+				String genreCd = rs.getString("genreCd");
+	        		String genreName = rs.getString("genreName");
+	            		GenreDto dto = new GenreDto(genreCd, genreName);
+	            		list.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	public PostDto selectByPostId () {
