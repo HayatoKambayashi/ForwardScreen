@@ -54,7 +54,7 @@ public class PostDto {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public boolean isAnonyFlag() {
+	public boolean getAnonyFlag() {
 		return anonyFlag;
 	}
 	public void setAnonyFlag(boolean anonyFlag) {
