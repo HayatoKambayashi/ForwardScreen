@@ -40,7 +40,8 @@
         <td>
           <form action="mypage" method="post">
             <input type="hidden" name="postId" value="${post.postId}" />
-            <input type="submit" name="action" value="delete" />
+            <input type="submit" name="main" value="メインページへ" />
+            <input type="submit" name="delete" value="削除" />
           </form>
         </td>
       </tr>
