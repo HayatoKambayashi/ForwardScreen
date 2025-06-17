@@ -26,7 +26,7 @@ public class ManagerController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//データベースに接続するための情報
-		String url = "jdbc:mysql://localhost:3306/*****"; //データベース名(未定）
+		String url = "jdbc:mysql://localhost:3306/syumixDB"; //データベース名(未定）
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
