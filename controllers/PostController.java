@@ -58,7 +58,7 @@ public class PostController extends HttpServlet {
 		String jsp = "/mypage";	// sprint1では投稿フォーム確認画面にいかずマイページ画面に遷移させる。
 		
 		try{
-			if(btn != null && btn.equals("submit")) {
+			if(btn != null && btn.equals("post")) {
 				PostDto postDto = new PostDto();
 			
 				if (genreCd != null && !genreCd.isEmpty()
