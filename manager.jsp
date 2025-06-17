@@ -37,7 +37,7 @@
             
             <!-- 発行ボタンを押すと「ユーザID」をサーブレットに渡す -->
             <td>
-                <form action="managerpage" method="post">
+                <form action="/managerpage" method="post">
                     <input type="hidden" name="userid" value="<%= user.getUserId() %>" />
                     <input type="submit" value="発行" />
                 </form>
@@ -50,7 +50,7 @@
 
 		<!-- メインページに飛ぶボタン（戻るページ名は未定） -->
 		  
-		<form action="****" method="get">
+		<form action="main.jsp" method="get">
     		<input type="submit" value="戻る">
 		</form>
 	
