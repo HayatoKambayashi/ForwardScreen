@@ -28,7 +28,7 @@ public class ManagerController extends HttpServlet {
 		
 		
 		UserDao userDao = new UserDao();
-		ArrayList<UserDto> userList = userDao.getAllGenre(); // ユーザ一覧を取得
+		ArrayList<UserDto> userList = userDao.findAll(); // ユーザ一覧を取得
 		 // ユーザ情報をセットする
 	    request.setAttribute("userList", userList);
 	    request.getRequestDispatcher("/manager.jsp").forward(request, response); // JSPへ遷移
@@ -42,7 +42,8 @@ public class ManagerController extends HttpServlet {
 	    String userId = request.getParameter("userId");
 
 	    // userId を使ってパスワード発行処理を行う
-	   
+	    UserDao userDao = new UserDao();
+	    userDao.setkariPassword();
 	    //DAOのメソッドで「仮パスフラグ」を立てる(DAOを使う？)
 	    
 	    // 処理後に画面遷移やメッセージ表示など
