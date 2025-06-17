@@ -1,0 +1,44 @@
+package jp.co.akkodis.shumix;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+import jp.co.akkodis.shumix.dao.postDao; 
+import jp.co.akkodis.shumix.dto.postDto; 
+/**
+ * Servlet implementation class mainController
+ */
+@WebServlet("/mainController")
+public class MainController extends HttpServlet {
+	
+	private PostDAO postDao;
+
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String link = "main.jsp";
+		Connection conn = DriverManager.getConnection( 
+				"jdbc:mysql://localhost/db", 
+				"root",
+				"VSO@Luser234@"); 
+		postDao = new PostDAO(conn);
+		
+		PostDTO data  = postDao.pick();
+		
+		request.setAttribute("data", data);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
+		dispatcher.forward(request, response);
+		
+	}
+
+}
