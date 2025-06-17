@@ -55,7 +55,7 @@ public class PostController extends HttpServlet {
 		Date sqlDate = Date.valueOf(today);
 
 
-		String jsp = "/mypage.jsp";	// sprint1では投稿フォーム確認画面にいかずマイページ画面に遷移させる。(mypage.jspの名前は仮)
+		String jsp = "/mypage";	// sprint1では投稿フォーム確認画面にいかずマイページ画面に遷移させる。
 		
 		try{
 			if(btn != null && btn.equals("post")) {
