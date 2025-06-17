@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import jp.co.akkodis.syumix.dao.postDao;
-import jp.co.akkodis.syumix.dto.postDto;
+import jp.co.akkodis.syumix.dao.PostDao;
+import jp.co.akkodis.syumix.dto.PostDto;
 
 /**
  * Servlet implementation class MyPageController
@@ -22,7 +22,7 @@ public class MyPageController extends HttpServlet {
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
 	ServletException, IOException {
-    	postDao postDao = new postDao();
+    	PostDao postDao = new PostDao();
     	ArrayList userPosts = postDao.selectByUser(request.getSession().getAttribute("userId"));
     	
     	//JSPに渡す
@@ -41,7 +41,7 @@ public class MyPageController extends HttpServlet {
 		
 		if ("削除".equals(action)) { //削除ボタンを押した場合
 			int postID = Integer.parseInt(request.getParameter("postId"));
-	        postDao postDao = new postDao();
+	        PostDao postDao = new PostDao();
 	        postDao.delete(postID);
 	        request.setAttribute("deleteflug", flug);
 	        
