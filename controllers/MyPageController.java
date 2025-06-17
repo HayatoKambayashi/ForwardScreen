@@ -1,4 +1,4 @@
-package jp.co.akkodis.syumix
+package jp.co.akkodis.syumix;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,6 +8,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import jp.co.akkodis.syumix.dao.postDao;
+import jp.co.akkodis.syumix.dto.postDto;
 
 /**
  * Servlet implementation class MyPageController
@@ -36,7 +39,7 @@ public class MyPageController extends HttpServlet {
 		String action = request.getParameter("action");
 		boolean flug = true;
 		
-		if ("delete".equals(action)) { //削除ボタンを押した場合
+		if ("削除".equals(action)) { //削除ボタンを押した場合
 			int postID = Integer.parseInt(request.getParameter("postId"));
 	        postDao postDao = new postDao();
 	        postDao.delete(postID);
@@ -44,7 +47,7 @@ public class MyPageController extends HttpServlet {
 	        
 	        request.getRequestDispatcher("/mypage.jsp").forward(request, response);
 	        
-	    } else if ("main".equals(action)) { // メインページへボタンを押した場合
+	    } else if ("メインページへ".equals(action)) { // メインページへボタンを押した場合
 	        request.getRequestDispatcher("/main.jsp").forward(request, response);
 	    }
 	        
