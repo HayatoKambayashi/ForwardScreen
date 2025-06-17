@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import jp.co.akkodis.syumix.dto.GenreDto;
 import jp.co.akkodis.syumix.dto.PostDto;
 
 public class PostDao extends Dao{
@@ -13,7 +14,7 @@ public class PostDao extends Dao{
 		super();
 	}
 	
-	public int delete(int postId) {
+	public int delete(int postId) { // TODO: 要定義
 		
 		return 0; // karioki
 	}
@@ -94,4 +95,32 @@ public class PostDao extends Dao{
 		
 		return list;
 	}
+	
+	// TODO: 以下1メソッドを要定義
+	public ArrayList<PostDto> selectByUser(String userId) {
+		
+		return new ArrayList<>();
+	}
+	
+//	public PostDto pick () { // 担当： 矢島
+//		
+//	}
+	
+	//TODO: 以下2メソッドを要定義
+	public ArrayList<GenreDto> getAllGenre () {
+		
+		return new ArrayList<>();
+	}
+	
+	public PostDto selectByPostId () {
+		
+//		if (rs.next()) {
+//			
+//		}
+		
+		return new PostDto();
+
+	}
+	
+	
 }
