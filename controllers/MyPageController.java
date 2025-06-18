@@ -23,23 +23,19 @@ public class MyPageController extends HttpServlet {
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
 	ServletException, IOException {
-    	PostDao postDao = null;
-		try {
-			postDao = new PostDao();
+		try (PostDao postDao = new PostDao()) {
+			String userId = (String) request.getSession().getAttribute("userId");
+	    	ArrayList<PostDto> userPosts = postDao.selectByUser(userId);
+
+	    	//ArrayList userPosts = postDao.selectByUser(request.getSession().getAttribute("userId"));
+	    	
+	    	//JSPに渡す
+			request.setAttribute("userPosts", userPosts);
+			request.getRequestDispatcher("/mypage.jsp").forward(request, response);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-    	String userId = (String) request.getSession().getAttribute("userId");
-    	ArrayList<PostDto> userPosts = postDao.selectByUser(userId);
-
-    	//ArrayList userPosts = postDao.selectByUser(request.getSession().getAttribute("userId"));
-    	
-    	//JSPに渡す
-		request.setAttribute("userPosts", userPosts);
-		request.getRequestDispatcher("/mypage.jsp").forward(request, response);
-
-		
 	}
     
     //投稿を削除
@@ -51,28 +47,21 @@ public class MyPageController extends HttpServlet {
 		
 		if ("削除".equals(action)) { //削除ボタンを押した場合
 			int postID = Integer.parseInt(request.getParameter("postId"));
-	        PostDao postDao = null;
-			try {
-				postDao = new PostDao();
+			
+			try (PostDao postDao = new PostDao()) {
+				postDao.delete(postID);
+		        request.setAttribute("deleteflug", flug);
+		        
+		        request.getRequestDispatcher("/mypage.jsp").forward(request, response);
+		        
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
-	        postDao.delete(postID);
-	        request.setAttribute("deleteflug", flug);
-	        
-	        request.getRequestDispatcher("/mypage.jsp").forward(request, response);
 	        
 	    } else if ("メインページへ".equals(action)) { // メインページへボタンを押した場合
 	        request.getRequestDispatcher("/main.jsp").forward(request, response);
 	    }
-	        
-	        
-			
-		}
-
-		
-		}
-				
-
+	}
+}
 
