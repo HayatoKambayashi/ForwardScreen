@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import jp.co.akkodis.syumix.dao.PostDao;
@@ -22,8 +23,17 @@ public class MyPageController extends HttpServlet {
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
 	ServletException, IOException {
-    	PostDao postDao = new PostDao();
-    	ArrayList userPosts = postDao.selectByUser(request.getSession().getAttribute("userId"));
+    	PostDao postDao = null;
+		try {
+			postDao = new PostDao();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+    	String userId = (String) request.getSession().getAttribute("userId");
+    	ArrayList<PostDto> userPosts = postDao.selectByUser(userId);
+
+    	//ArrayList userPosts = postDao.selectByUser(request.getSession().getAttribute("userId"));
     	
     	//JSPに渡す
 		request.setAttribute("userPosts", userPosts);
@@ -41,7 +51,13 @@ public class MyPageController extends HttpServlet {
 		
 		if ("削除".equals(action)) { //削除ボタンを押した場合
 			int postID = Integer.parseInt(request.getParameter("postId"));
-	        PostDao postDao = new PostDao();
+	        PostDao postDao = null;
+			try {
+				postDao = new PostDao();
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 	        postDao.delete(postID);
 	        request.setAttribute("deleteflug", flug);
 	        
@@ -54,7 +70,9 @@ public class MyPageController extends HttpServlet {
 	        
 			
 		}
+
+		
+		}
 				
-	}
 
 
