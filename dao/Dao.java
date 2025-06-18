@@ -14,7 +14,7 @@ public class Dao implements AutoCloseable{
 	 * @param 引数は不要です。
 	 */
 	public Dao()  throws ClassNotFoundException, SQLException {
-		String url = "jdbc:mysql://localhost/db";
+		String url = "jdbc:mysql://localhost/syumixdb";
 		String user = "root";
 		String password = "VSOLuser123456";
 		
