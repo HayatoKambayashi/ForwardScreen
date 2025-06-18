@@ -58,30 +58,28 @@ public class LoginController extends HttpServlet {
 					request.setAttribute("infoMessage", "従業員番号またはパスワードに誤りがあります。");
 			        request.getRequestDispatcher("/login.jsp").forward(request, response);
 			        return;
-				}
-				//[認証エラーがない場合]
-				if ((user.getUserId() == inputUser) && (user.getPass() == inputPass)
-					&& (user.isRetiredFlag() == false) && (user.isPassFlag() == false)) {
-					// 取得したユーザ情報をセッションスコープに登録する。
-					HttpSession session = request.getSession();
-					session.setAttribute("loginUser", user);
-			        request.getRequestDispatcher("/main.jsp").forward(request, response);
-			        return;
-				}
-				//[認証エラーがなく、UserDto内のisRetiredFlagがtrueの場合]
-				if ((user.getUserId() == inputUser) && (user.getPass() == inputPass)
-					&& (user.isRetiredFlag() == true)) {
-					request.setAttribute("infoMessage", "既に退職済みです。");
-		            request.getRequestDispatcher("/login.jsp").forward(request, response);
-			        return;
-				}
-				//[認証エラーがなく、UserDto内のisPassFlagがtrueの場合]
-				if ((user.getUserId() == inputUser) && (user.getPass() == inputPass)
-					&& (user.isPassFlag() == true)) {
-					HttpSession session = request.getSession();
-					session.setAttribute("loginUser", user);
-		            request.getRequestDispatcher("/passChange.jsp").forward(request, response);
-			        return;
+				}else {
+					//[認証エラーがない場合]
+					if(user.isRetiredFlag() == false) && (user.isPassFlag() == false)) {
+						// 取得したユーザ情報をセッションスコープに登録する。
+						HttpSession session = request.getSession();
+						session.setAttribute("loginUser", user);
+				        request.getRequestDispatcher("/main.jsp").forward(request, response);
+				        return;
+					}
+					//[認証エラーがなく、UserDto内のisRetiredFlagがtrueの場合]
+					if(user.isRetiredFlag() == true)) {
+						request.setAttribute("infoMessage", "既に退職済みです。");
+			            request.getRequestDispatcher("/login.jsp").forward(request, response);
+				        return;
+					}
+					//[認証エラーがなく、UserDto内のisPassFlagがtrueの場合]
+					if(user.isPassFlag() == true)) {
+						HttpSession session = request.getSession();
+						session.setAttribute("loginUser", user);
+			            request.getRequestDispatcher("/passChange.jsp").forward(request, response);
+				        return;
+					}
 				}
 			} else {
 				//!!!![データベーステーブルから取得したデータがnullもしくは不正な値の場合]
