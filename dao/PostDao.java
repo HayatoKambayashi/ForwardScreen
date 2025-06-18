@@ -16,7 +16,23 @@ public class PostDao extends Dao{
 	
 	public int delete(int postId) { // TODO: 要定義
 		
-		return 0; // karioki
+		
+		String sql = "DELETE FROM * WHERE postId = ?" ; 
+		int result =0;
+		
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
+		    ps.setInt(1, postId);
+		    result = ps.executeUpdate();
+		    
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+		
+		
 	}
 	
 	public int insert (PostDto postDto) {
