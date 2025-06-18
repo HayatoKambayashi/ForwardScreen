@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import jp.co.akkodis.syumix.dao.postDao; 
-import jp.co.akkodis.syumix.dto.postDto; 
+import jp.co.akkodis.syumix.dao.PostDao; 
+import jp.co.akkodis.syumix.dto.PostDto; 
 /**
  * Servlet implementation class mainController
  */
