@@ -34,9 +34,12 @@ public class LoginController extends HttpServlet {
 		
 		// 以下2行+tryブロックを追加（矢島）
 		passChangeFlag = request.getParameter("id");
+		if (passChangeFlag == null) {
+			passChangeFlag = "0";
+		}
 		
 		try (UserDao userDao = new UserDao()){
-			if ( !(passChangeFlag.isEmpty()) ) { // 追加事項A
+			if ( !(passChangeFlag.equals("0")) ) { // 追加事項A
 				userDao.updatePassword(inputPass, inputUser);
 				request.getRequestDispatcher("/main.jsp").forward(request, response);
 				// mainに遷移する。
