@@ -11,6 +11,11 @@
 <body>
 <h2>ユーザ一覧</h2>
 
+   <!-- ユーザの一覧表示 -->
+    <p style="color: green;">
+        <%= request.getAttribute("message") != null ? request.getAttribute("message") : "" %>
+    </p>
+
 <table border="1">
     <tr>
         <th>ユーザID</th>
@@ -24,7 +29,7 @@
             <td>${user.userName}</td>
             <td>
                 <form action="managerpage" method="post">
-                    <input type="hidden" name="userid" value="${user.userId}" />
+                    <input type="hidden" name="userId" value="${user.userId}" />
                     <input type="submit" value="発行" />
                 </form>
             </td>
@@ -32,6 +37,10 @@
     </c:forEach>
 
 </table>
+
+		<form action="main.jsp" method="get">
+    		<input type="submit" value="戻る">
+		</form>
 	
 </body>
 </html>	
