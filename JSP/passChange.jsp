@@ -11,6 +11,9 @@
     <div class="login-container">
         <h2>パスワード変更</h2>
         <form action="login" method="post">
+        <input type="hidden" name="id" value="1"> 
+        <input type="hidden" name="userId" value="<%=request.getAttribute("loginuser")%>">
+        
             <label for="currentPassword">新規パスワード:</label>
             <input type="text" id="currentPassword" name="newPass" required>
             <input type="submit" value="変更する">
