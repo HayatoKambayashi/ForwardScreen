@@ -18,7 +18,7 @@ import java.util.List;
  */
 @WebServlet("/managerpage")
 public class ManagerController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
