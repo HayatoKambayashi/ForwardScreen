@@ -56,6 +56,11 @@ public class ManagerController extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    String userId = request.getParameter("userId");
+	    
+	    System.out.println(userId);
+	    
+	    System.out.println("1");
+	    int test;
 
 	    // userId を使ってパスワード発行処理を行う
 	    UserDao userDao = null;
@@ -69,15 +74,17 @@ public class ManagerController extends HttpServlet {
 			e.printStackTrace();
 		}
 	    try {
-			userDao.setKariPassword(userId);
+			test = userDao.setKariPassword(userId);
+			 System.out.println(test);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    //DAOのメソッドで「仮パスフラグ」を立てる(DAOを使う？)
 	    
 	    // 処理後に画面遷移やメッセージ表示など
 	    request.setAttribute("message", "ユーザー " + userId + " のパスワードを発行しました。");
+	    doGet(request,response);
+	    request.getRequestDispatcher("/manager.jsp").forward(request, response);
 	}
 
 
