@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
 
 import jp.co.akkodis.syumix.dto.GenreDto;
 import jp.co.akkodis.syumix.dto.PostDto;
@@ -163,41 +164,14 @@ public class PostDao extends Dao{
 		return postlist;
 	}
 	
-	/**
-	 * 投稿画面に遷移する際に、投稿できるジャンル一覧を取得するメソッドです。
-	 * @return
-	 */
-	public ArrayList<GenreDto> getAllGenre () { // TODO
-		String sql = "SELECT * FROM genre;";
-		
-		ArrayList<GenreDto> list = new ArrayList<GenreDto>(); // resultで返却されるべきリスト
-		
-		try {
-			Statement stat = connection.createStatement();
-			ResultSet rs = stat.executeQuery(sql);
-			
-			while (rs.next()) {
-				String genreCd = rs.getString("genreCd");
-	        		String genreName = rs.getString("genreName");
-	            		GenreDto dto = new GenreDto(genreCd, genreName);
-	            		list.add(dto);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
 	
-
-	public PostDto pick () { // 担当： 上林
+public PostDto pick () { // 担当： 上林
 		
-		String sql = "SELECT * FROM ?;" ; // 準備中のSQL
+		String sql = "SELECT * FROM post;" ;
 		
 		ArrayList<PostDto> list = new ArrayList<PostDto>();
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setString(1, post);
 			// todo
 			ResultSet rs = ps.executeQuery();
 			
@@ -222,8 +196,34 @@ public class PostDao extends Dao{
 		// DB内の投稿数までの数字をランダムに生成
 		int randomInt = rand.nextInt(list.size());
 		
-		return list(randomInt);
+		return list.get(randomInt);
 		
+	}
+	
+	/**
+	 * 投稿画面に遷移する際に、投稿できるジャンル一覧を取得するメソッドです。
+	 * @return
+	 */
+	public ArrayList<GenreDto> getAllGenre () { // TODO
+		String sql = "SELECT * FROM genre;";
+		
+		ArrayList<GenreDto> list = new ArrayList<GenreDto>(); // resultで返却されるべきリスト
+		
+		try {
+			Statement stat = connection.createStatement();
+			ResultSet rs = stat.executeQuery(sql);
+			
+			while (rs.next()) {
+				String genreCd = rs.getString("genreCd");
+	        		String genreName = rs.getString("genreName");
+	            		GenreDto dto = new GenreDto(genreCd, genreName);
+	            		list.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 }
