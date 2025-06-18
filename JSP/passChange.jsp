@@ -10,7 +10,7 @@
 <body>
     <div class="login-container">
         <h2>パスワード変更</h2>
-        <form action="loginController" method="post">
+        <form action="login" method="post">
             <label for="currentPassword">新規パスワード:</label>
             <input type="text" id="currentPassword" name="newPass" required>
             <input type="submit" value="変更する">

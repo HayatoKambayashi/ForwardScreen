@@ -8,9 +8,9 @@
 <body>
     <div class="login-container">
         <h2>ログイン</h2>
-        <form action="loginController" method="post">
+        <form action="login" method="post">
             <label for="userName">ユーザー名:</label><br>
-            <input type="text" id="userName" name="userid" required><br>
+            <input type="text" id="userName" name="userId" required><br>
 
             <label for="password">パスワード:</label><br>
             <input type="password" id="password" name="password" required><br>
