@@ -59,8 +59,6 @@ public class ManagerController extends HttpServlet {
 	    
 	    System.out.println(userId);
 	    
-	    System.out.println("1");
-	    int test;
 
 	    // userId を使ってパスワード発行処理を行う
 	    UserDao userDao = null;
@@ -74,8 +72,8 @@ public class ManagerController extends HttpServlet {
 			e.printStackTrace();
 		}
 	    try {
-			test = userDao.setKariPassword(userId);
-			 System.out.println(test);
+			userDao.setKariPassword(userId);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
