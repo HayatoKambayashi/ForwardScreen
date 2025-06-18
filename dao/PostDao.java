@@ -3,6 +3,7 @@ package jp.co.akkodis.syumix.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import jp.co.akkodis.syumix.dto.GenreDto;
@@ -14,14 +15,18 @@ public class PostDao extends Dao{
 		super();
 	}
 	
-	public int delete(String postId) { // TODO: 要定義
-		
+	/**
+	 * マイページ経由で投稿を削除するためのメソッドです。
+	 * @param postId
+	 * @return 削除された件数。エラーの場合は 0。
+	 */
+	public int delete(int postId) {
 		
 		String sql = "DELETE FROM post WHERE postId = ?" ; 
 		int result =0;
 		
 		try (PreparedStatement ps = connection.prepareStatement(sql)) {
-		    ps.setString(1, postId);
+		    ps.setInt(1, postId);
 		    result = ps.executeUpdate();
 		    
 		}
@@ -31,10 +36,13 @@ public class PostDao extends Dao{
 		
 		return result;
 		
-		
-		
 	}
 	
+	/**
+	 * 投稿をデータベースに挿入するメソッドです。
+	 * @param postDto（投稿内容が既に入れ込まれたJavaBean）
+	 * @return DBに反映された件数。エラーの場合は 0。
+	 */
 	public int insert (PostDto postDto) {
 		String sql = "INSERT INTO post (userId, source, url, gendercd,"
 				+ "image, anonyFlag, date) VALUES"
@@ -80,6 +88,11 @@ public class PostDao extends Dao{
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param genreCd
+	 * @return List<PostDto>
+	 */
 	public ArrayList<PostDto> findByGenre (String genreCd) {
 		String sql = "SELECT * FROM post WHERE genreCd = ?;" ; // 準備中のSQL
 		
@@ -102,7 +115,7 @@ public class PostDao extends Dao{
 				post.setAnonyFlag(rs.getBoolean(7));
 				post.setDate(rs.getDate(8));
 				
-				list.add(post); // TODO: 実装途中です。妥当性検証中
+				list.add(post);
 			}
 			
 		} catch (SQLException e) {
@@ -112,11 +125,16 @@ public class PostDao extends Dao{
 		return list;
 	}
 	
-	// TODO: 以下1メソッドを要定義
+	/**
+	 * マイページに移動する際に、現在ログインされているユーザのIDと一致する
+	 * 投稿一覧を新しい順に取得します。
+	 * @param userId
+	 * @return ArrayList<PostDto> postlist
+	 */
 	public ArrayList<PostDto> selectByUser(String userId) {
-		String sql = "SELECT * FROM post WHERE userId = ? order by userId";
+		String sql = "SELECT * FROM post WHERE userId = ? order by PostId DESC ;";
 		
-		ArrayList<PostDto> postlist = new ArrayList<PostDto>();
+		ArrayList<PostDto> postlist = new ArrayList<PostDto>(); // return
 		
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
@@ -145,8 +163,11 @@ public class PostDao extends Dao{
 		return postlist;
 	}
 	
-	//TODO: 以下2メソッドを要定義
-	public ArrayList<GenreDto> getAllGenre () {
+	/**
+	 * 投稿画面に遷移する際に、投稿できるジャンル一覧を取得するメソッドです。
+	 * @return
+	 */
+	public ArrayList<GenreDto> getAllGenre () { // TODO
 		String sql = "SELECT * FROM genre;";
 		
 		ArrayList<GenreDto> list = new ArrayList<GenreDto>(); // resultで返却されるべきリスト
@@ -167,16 +188,5 @@ public class PostDao extends Dao{
 		}
 		return list;
 	}
-	
-	public PostDto selectByPostId () {
-		
-//		if (rs.next()) {
-//			
-//		}
-		
-		return new PostDto();
-
-	}
-	
 	
 }
