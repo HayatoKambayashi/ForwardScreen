@@ -34,7 +34,7 @@
         <c:if test="${not empty data.image}">
             <img src="${data.image}" alt="Image" class="image"/>
         </c:if>
-        <form action="/mainController" method="get">
+        <form action="/maincontroller" method="get">
             <button type="submit" class="button">表示</button>
         </form>
         <form action="/managercontroller" method="get" class="admin-button">
