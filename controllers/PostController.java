@@ -28,11 +28,16 @@ public class PostController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GenreDao genreDao = new GenreDao();
-		ArrayList<GenreDto> allGenreList = genreDao.getAllGenre(); // ジャンル一覧を取得
-		request.setAttribute("allGenreList", allGenreList);
-		RequestDispatcher rd = request.getRequestDispatcher("/post.jsp"); // 投稿フォーム入力画面で使うのでpost.jspに送る
-		rd.forward(request, response);
+		try {
+			PostDao postDao = new PostDao();
+			ArrayList<GenreDto> allGenreList = postDao.getAllGenre(); // ジャンル一覧を取得
+			request.setAttribute("allGenreList", allGenreList);
+			RequestDispatcher rd = request.getRequestDispatcher("/post.jsp"); // 投稿フォーム入力画面で使うのでpost.jspに送る
+			rd.forward(request, response);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 	}
 
 	/**
