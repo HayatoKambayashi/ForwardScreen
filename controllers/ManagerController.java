@@ -43,7 +43,7 @@ public class ManagerController extends HttpServlet {
 
 	    // userId を使ってパスワード発行処理を行う
 	    UserDao userDao = new UserDao();
-	    userDao.setKariPassword();
+	    userDao.setKariPassword(userId);
 	    //DAOのメソッドで「仮パスフラグ」を立てる(DAOを使う？)
 	    
 	    // 処理後に画面遷移やメッセージ表示など
