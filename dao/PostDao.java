@@ -189,4 +189,41 @@ public class PostDao extends Dao{
 		return list;
 	}
 	
+
+	public PostDto pick () { // 担当： 上林
+		
+		String sql = "SELECT * FROM ?;" ; // 準備中のSQL
+		
+		ArrayList<PostDto> list = new ArrayList<PostDto>();
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, post);
+			// todo
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				PostDto post = new PostDto();
+				post.setPostId(rs.getInt(1));
+				post.setUserId(rs.getInt(2));
+				post.setSource(rs.getString(3));
+				post.setUrl(rs.getString(4));
+				post.setGenreCd(rs.getString(5));
+				post.setImage(rs.getString(6));
+				post.setAnonyFlag(rs.getBoolean(7));
+				post.setDate(rs.getDate(8));
+				
+				list.add(post); // TODO: 実装途中です。妥当性検証中
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		Random rand = new Random();
+		// DB内の投稿数までの数字をランダムに生成
+		int randomInt = rand.nextInt(list.size());
+		
+		return list(randomInt);
+		
+	}
+	
 }
