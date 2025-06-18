@@ -21,7 +21,7 @@ public class PostDao extends Dao{
 		int result =0;
 		
 		try (PreparedStatement ps = connection.prepareStatement(sql)) {
-		    ps.setInt(1, postId);
+		    ps.setString(1, postId);
 		    result = ps.executeUpdate();
 		    
 		}
