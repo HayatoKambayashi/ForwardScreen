@@ -17,7 +17,7 @@ public class PostDao extends Dao{
 	public int delete(int postId) { // TODO: 要定義
 		
 		
-		String sql = "DELETE FROM * WHERE postId = ?" ; 
+		String sql = "DELETE FROM post WHERE postId = ?" ; 
 		int result =0;
 		
 		try (PreparedStatement ps = connection.prepareStatement(sql)) {
