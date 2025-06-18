@@ -56,6 +56,7 @@ INSERT INTO genre VALUES ('bk', '本');
 
 
 // 投稿テーブルにもっとデータ追加したい場合(せっかく書いたので)
+// ※各人のローカルで初めてデータベースを作成するとき(DB作成テスト時)は以下のデータは追加しない
 INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100002', '斜陽', '', 'bk', TRUE);
 INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100006', '夜に駆ける', '', 'm', FALSE);
 INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100005', 'ラマダカタブラ', '', 'bg', FALSE);
