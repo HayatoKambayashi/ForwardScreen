@@ -1,18 +1,19 @@
 package jp.co.akkodis.syumix;
 
 import jakarta.servlet.ServletException;
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import jp.co.akkodis.syumix.dao.UserDao;
+import jp.co.akkodis.syumix.dto.UserDto;
+
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 /**
  * Servlet implementation class ManagerController
  */
@@ -27,8 +28,23 @@ public class ManagerController extends HttpServlet {
 		
 		
 		
-		UserDao userDao = new UserDao();
-		ArrayList<UserDto> userList = userDao.findAll(); // ユーザ一覧を取得
+		UserDao userDao = null;
+		try {
+			userDao = new UserDao();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ArrayList<UserDto> userList = null;
+		try {
+			userList = userDao.findAll();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} // ユーザ一覧を取得
 		 // ユーザ情報をセットする
 	    request.setAttribute("userList", userList);
 	    request.getRequestDispatcher("/manager.jsp").forward(request, response); // JSPへ遷移
@@ -42,8 +58,22 @@ public class ManagerController extends HttpServlet {
 	    String userId = request.getParameter("userId");
 
 	    // userId を使ってパスワード発行処理を行う
-	    UserDao userDao = new UserDao();
-	    userDao.setKariPassword(userId);
+	    UserDao userDao = null;
+		try {
+			userDao = new UserDao();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    try {
+			userDao.setKariPassword(userId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    //DAOのメソッドで「仮パスフラグ」を立てる(DAOを使う？)
 	    
 	    // 処理後に画面遷移やメッセージ表示など
