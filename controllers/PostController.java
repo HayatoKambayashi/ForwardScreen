@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Calendar;
 
-import jp.co.akkodis.syumix.dto.PostDao;
+import jp.co.akkodis.syumix.dao.PostDao;
 import jp.co.akkodis.syumix.dto.PostDto;
 import jp.co.akkodis.syumix.dto.GenreDto;
 
