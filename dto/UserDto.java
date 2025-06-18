@@ -7,6 +7,7 @@ public class UserDto {
 	private String pass;
 	private boolean retiredFlag;
 	private boolean passFlag;
+	private boolean managerFlag;
 	
 	// getter, setter
 	/*
@@ -43,6 +44,9 @@ public class UserDto {
 	}
 	public void setPassFlag(boolean passFlag) { // DD項番10
 		this.passFlag = passFlag;
+	}
+	public boolean getManagerFlag() { // DD項番12
+		return managerFlag;
 	}
 	
 	
