@@ -15,7 +15,7 @@
         <input type="hidden" name="userId" value="<%=request.getAttribute("loginuser")%>">
         
             <label for="currentPassword">新規パスワード:</label>
-            <input type="text" id="currentPassword" name="newPass" required>
+            <input type="text" id="currentPassword" name="password" required>
             <input type="submit" value="変更する">
         </form>
 
