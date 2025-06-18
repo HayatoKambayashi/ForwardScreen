@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, jp.co.akkodis.syumix.UserDto" %>
+<%@ page import="java.util.*, jp.co.akkodis.syumix.dto.UserDto" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,51 +9,29 @@
 <title>manager form</title>
 </head>
 <body>
+<h2>ユーザ一覧</h2>
 
+<table border="1">
+    <tr>
+        <th>ユーザID</th>
+        <th>ユーザ名</th>
+        <th>仮パス発行</th>
+    </tr>
 
-    <h1>ユーザー一覧</h1>
-    
-    <!-- ユーザの一覧表示 -->
-    <p style="color: green;">
-        <%= request.getAttribute("message") != null ? request.getAttribute("message") : "" %>
-    </p>
-    
-    <table border="1">
+    <c:forEach var="user" items="${userList}">
         <tr>
-            <th>ユーザーID</th>
-            <th>ユーザー名</th>
-            <th>パスワード発行</th>
-        </tr>
-        
-        <!-- サーブレットからユーザ情報を受け取る -->
-        <%
-            List<UserDto> userList = (List<UserDto>) request.getAttribute("userList");
-            for (UserDto user : userList) {
-        %>
-        
-        <!-- 人数分の「ユーザID」「ユーザ名」「仮パス発行ボタン」を表示 -->
-        <tr>
-            <td><%= user.getUserId() %></td>
-            <td><%= user.getUserName() %></td>
-            
-            <!-- 発行ボタンを押すと「ユーザID」をサーブレットに渡す -->
+            <td>${user.userId}</td>
+            <td>${user.userName}</td>
             <td>
                 <form action="managerpage" method="post">
-                    <input type="hidden" name="userid" value="<%= user.getUserId() %>" />
+                    <input type="hidden" name="userid" value="${user.userId}" />
                     <input type="submit" value="発行" />
                 </form>
             </td>
         </tr>
-        <%
-            }
-        %>
-    </table>
+    </c:forEach>
 
-		<!-- メインページに飛ぶボタン（戻るページ名は未定） -->
-		  
-		<form action="mainController" method="get">
-    		<input type="submit" value="戻る">
-		</form>
+</table>
 	
 </body>
 </html>	
