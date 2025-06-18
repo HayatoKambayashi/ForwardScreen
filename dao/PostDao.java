@@ -14,7 +14,7 @@ public class PostDao extends Dao{
 		super();
 	}
 	
-	public int delete(int postId) { // TODO: 要定義
+	public int delete(String postId) { // TODO: 要定義
 		
 		
 		String sql = "DELETE FROM post WHERE postId = ?" ; 
