@@ -212,7 +212,7 @@ public class PostDao extends Dao{
 				post.setAnonyFlag(rs.getBoolean(7));
 				post.setDate(rs.getDate(8));
 				
-				list.add(post); // TODO: 実装途中です。妥当性検証中
+				list.add(post); 
 			}
 			
 		} catch (SQLException e) {
