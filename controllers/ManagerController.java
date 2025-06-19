@@ -2,6 +2,7 @@ package jp.co.akkodis.syumix;
 
 import jakarta.servlet.ServletException;
 
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,9 +29,14 @@ public class ManagerController extends HttpServlet {
 		
 		
 		
-		UserDao userDao = null;
-		try {
-			userDao = new UserDao();
+		try(UserDao userDao = new UserDao()) {
+			ArrayList<UserDto> userList = null;
+			userList = userDao.findAll();
+			
+			 // ユーザ一覧を取得
+			 // ユーザ情報をセットする
+		    request.setAttribute("userList", userList);
+		    request.getRequestDispatcher("/manager.jsp").forward(request, response); // JSPへ遷移
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,16 +44,7 @@ public class ManagerController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ArrayList<UserDto> userList = null;
-		try {
-			userList = userDao.findAll();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} // ユーザ一覧を取得
-		 // ユーザ情報をセットする
-	    request.setAttribute("userList", userList);
-	    request.getRequestDispatcher("/manager.jsp").forward(request, response); // JSPへ遷移
+
 
 		
 		
@@ -61,9 +58,13 @@ public class ManagerController extends HttpServlet {
 	    
 
 	    // userId を使ってパスワード発行処理を行う
-	    UserDao userDao = null;
-		try {
-			userDao = new UserDao();
+		try(UserDao userDao = new UserDao()) {
+			userDao.setKariPassword(userId);
+			
+			   // 処理後に画面遷移やメッセージ表示など
+		    request.setAttribute("message", "ユーザー " + userId + " のパスワードを発行しました。");
+		    doGet(request,response);
+		    request.getRequestDispatcher("/manager.jsp").forward(request, response);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,18 +72,6 @@ public class ManagerController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    try {
-			userDao.setKariPassword(userId);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    
-	    // 処理後に画面遷移やメッセージ表示など
-	    request.setAttribute("message", "ユーザー " + userId + " のパスワードを発行しました。");
-	    doGet(request,response);
-	    request.getRequestDispatcher("/manager.jsp").forward(request, response);
 	}
 
 
