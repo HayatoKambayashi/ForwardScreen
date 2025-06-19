@@ -1,0 +1,104 @@
+@charset "UTF-8";
+body {
+    background-color: rgb(255, 255, 255);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;         /* 画面の高さ100% */
+    background-color: #f0f2f5;
+}
+
+/* コンテンツを囲むコンテナ */
+.container {
+    background-color: rgb(255, 255, 255);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+}
+
+/* タイトル */
+h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+/* テキスト情報のスタイル */
+p {
+    margin: 10px 0;
+    color: #555;
+}
+
+/* 画像の表示スタイル */
+.image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin: 15px 0;
+}
+
+/* フォーム（ボタン）全体の間隔 */
+form {
+    margin-top: 10px;
+}
+
+/* 共通ボタンスタイル */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* 表示ボタン用スタイル */
+.button button {
+    background-color: #007bff;
+    color: white;
+}
+
+.button button:hover {
+    background-color: #0056b3;
+}
+
+/* 管理者画面ボタン */
+.admin-button button {
+    background-color: #28a745;
+    color: white;
+}
+
+.admin-button button:hover {
+    background-color: #218838;
+}
+
+/* 投稿入力画面ボタン */
+.post-button button {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.post-button button:hover {
+    background-color: #e0a800;
+}
+/* ボタンを並べるためのグループ */
+.button-group {
+    display: flex;
+    gap: 10px; /* ボタン同士の隙間 */
+    margin-top: 20px;
+}
+
+/* フォームの余白を消して、並びやすく */
+.button-group form {
+    margin: 0;
+}
