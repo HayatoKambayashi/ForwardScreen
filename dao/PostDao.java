@@ -45,9 +45,9 @@ public class PostDao extends Dao{
 	 * @return DBに反映された件数。エラーの場合は 0。
 	 */
 	public int insert (PostDto postDto) {
-		String sql = "INSERT INTO post (userId, source, url, gendercd,"
+		String sql = "INSERT INTO post (userId, source, url, genreCd,"
 				+ "image, anonyFlag, date) VALUES"
-				+ "(?, ?, ?, ?," // prepare ? 1～4個目 userId, 投稿本文, URL, genderCd
+				+ "(?, ?, ?, ?," // prepare ? 1～4個目 userId, 投稿本文, URL, genreCd
 				+ " ?, ?, ?)"; // 5～7個目 画像ソース(image), 匿名フラグ, 投稿時刻
 		
 		int result = 0;
