@@ -39,7 +39,9 @@
 <%
 Object obj = request.getAttribute("userPosts");
 ArrayList<PostDto> list = (ArrayList<PostDto>) obj;
-for (PostDto post:list) {
+Iterator<PostDto> it = list.iterator();
+while (it.hasNext()) {
+	PostDto post = it.next();
 %>
       <tr>
         <td><%=post.getPostId() %></td>
