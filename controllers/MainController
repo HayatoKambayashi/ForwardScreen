@@ -14,7 +14,7 @@ import jp.co.akkodis.syumix.dto.PostDto;
 /**
  * Servlet implementation class mainController
  */
-@WebServlet("/maincontroller")
+@WebServlet("/top")
 public class MainController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
