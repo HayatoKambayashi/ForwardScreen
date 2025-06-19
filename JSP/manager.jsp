@@ -11,12 +11,14 @@
 <body>
 <h2>ユーザ一覧</h2>
 
-   <!-- ユーザの一覧表示 -->
+   <!-- パスワード発行した場合のみメッセージを表示 -->
     <p style="color: green;">
         <%= request.getAttribute("message") != null ? request.getAttribute("message") : "" %>
     </p>
 
 <table border="1">
+
+	<!-- ユーザの一覧表示 -->
     <tr>
         <th>ユーザID</th>
         <th>ユーザ名</th>
