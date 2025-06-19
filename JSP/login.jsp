@@ -9,7 +9,7 @@
     <div class="login-container">
         <h2>ログイン</h2>
         <form action="login" method="post">
-            <label for="userName">ユーザー名:</label><br>
+            <label for="userName">ユーザーID:</label><br>
             <input type="text" id="userName" name="userId" required><br>
 
             <label for="password">パスワード:</label><br>
@@ -17,12 +17,14 @@
 
             <input type="submit" value="ログイン">
         </form>
-        <% 
-            String infoMessage = (String) request.getAttribute("infoMessage");
-            if (infoMessage != null) {
+       </div>
+        
+        <p style="color:red;">
+        <%	if (request.getAttribute("infoMessage") != null) {
+        	System.out.print(infoMessage);
+        }
         %>
-            <p class="error"><%= errorMessage %></p>
-        <% } %>
-    </div>
+        </p>
+    
 </body>
 </html>
