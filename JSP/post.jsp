@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page import="java.util.*, jp.co.akkodis.syumix.dto.PostDto" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>投稿フォーム入力ページ</title>
+<link rel="stylesheet" href="postStyle.css">
 </head>
 <body>
 	<header>
@@ -17,7 +19,7 @@
 				<tr>
 					<td>ジャンル</td>
 					<td>
-					<select name="genre" id="genre">
+					<select name="genreCd" id="genre">
 					  <c:forEach var="genre" items="${allGenreList}">
 					    <option value="${genre.genreCd}">${genre.genreName}</option>
 					  </c:forEach>
@@ -53,7 +55,7 @@
 				<tr>
 					<td colspan="2" align="center">
 						<input type="hidden" name="btn" value="post">
-						<input type="submit" value="投稿">
+						<button type="submit" class="button">投稿</button>
 					</td>
 				</tr>
 			</table>
