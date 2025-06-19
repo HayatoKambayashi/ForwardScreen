@@ -39,9 +39,10 @@
 <%
 Object obj = request.getAttribute("userPosts");
 ArrayList<PostDto> list = (ArrayList<PostDto>) obj;
-Iterator<PostDto> it = list.iterator();
-while (it.hasNext()) {
-	PostDto post = it.next();
+if (list.size() > 0) {
+	Iterator<PostDto> it = list.iterator();
+	while (it.hasNext()) {
+		PostDto post = it.next();
 %>
       <tr>
         <td><%=post.getPostId() %></td>
@@ -59,7 +60,8 @@ while (it.hasNext()) {
       </tr>
       
 <%
-}
+	} // whileループ
+} // if
 %>
 <!--    </c:forEach>-->
   </tbody>
