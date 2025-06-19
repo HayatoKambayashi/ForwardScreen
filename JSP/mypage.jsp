@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, jp.co.akkodis.syumix.dto.UserDto, jp.co.akkodis.syumix.dto.PostDto" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +12,8 @@
 <table>
   <thead>
   <%
+  String temp = (String) request.getAttribute("deleteflug");
+  Boolean flug = Boolean.parseBoolean(temp);
   if (flug == true) {
   %>
   
@@ -30,22 +34,32 @@
   </thead>
   <tbody>
     <%-- 投稿データ表示 --%>
-    <c:forEach var="post" items="\{postList}">
+    
+<!--    <c:forEach var="post" items="\{postList}">-->
+<%
+Object obj = request.getAttribute("userPosts");
+ArrayList<PostDto> list = (ArrayList<PostDto>) obj;
+for (PostDto post:list) {
+%>
       <tr>
-        <td>${post.postId}</td>
-        <td>${post.genreCd}</td>
-        <td>${post.source}</td>
-        <td><a href="${post.url}">${post.url}</a></td>
-        <td><img src="${post.image}" alt="投稿画像" /></td>
+        <td><%=post.getPostId() %></td>
+        <td><%=post.getGenreCd() %></td>
+        <<td><%=post.getSource() %></td>
+        <td><%=post.getUrl() %></td>
+        <td><%=post.getImage() %></td>
         <td>
           <form action="mypage" method="post">
-            <input type="hidden" name="postId" value="${post.postId}" />
+            <input type="hidden" name="postId" value=<%=post.getPostId()%>
             <input type="submit" name="action" value="メインページへ" />
             <input type="submit" name="action" value="削除" />
           </form>
         </td>
       </tr>
-    </c:forEach>
+      
+<%
+}
+%>
+<!--    </c:forEach>-->
   </tbody>
 </table>
 
