@@ -60,7 +60,8 @@
 				</tr>
 			</table>
 		</form>
-		<p><a href="main">メインページへ</a></p>
+		<p><a href="maincontroller">メインページへ</a></p>
+		<p><a href="mypage">マイページへ</a></p>
 	</main>
 </body>
 </html>
