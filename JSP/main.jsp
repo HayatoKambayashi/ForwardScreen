@@ -40,6 +40,9 @@
         <form action="/managercontroller" method="get" class="admin-button">
             <button type="submit">管理者画面へ</button>
         </form>
+		<form action="/post" method="get" class="admin-button">
+            <button type="submit">投稿入力画面へ</button>
+        </form>
     </div>
 </body>
 </html>
