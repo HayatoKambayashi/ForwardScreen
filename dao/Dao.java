@@ -17,7 +17,7 @@ public class Dao implements AutoCloseable {
 		String url = "jdbc:mysql://localhost/syumixdb";
 		//"jdbc:mysql://localhost/db"
 		String user = "root";
-		String password = "rmrm1312";
+		String password = "09113090Rin_";
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

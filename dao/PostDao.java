@@ -172,6 +172,7 @@ public PostDto pick () { // 担当： 上林
 		ArrayList<PostDto> list = new ArrayList<PostDto>();
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
+			// todo
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
