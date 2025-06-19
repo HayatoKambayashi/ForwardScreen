@@ -11,22 +11,23 @@
 <div class="wrapper">
     <div class="container">
         <h2>投稿</h2>
-        <p>UserID: ${data.userID}</p>
+        <p>UserID: ${data.userId}</p>
         <p>URL: <a href="${data.url}" target="_blank">${data.url}</a></p>
         <p>Source: ${data.source}</p>
         <c:if test="${not empty data.image}">
             <img src="${data.image}" alt="Image" class="image"/>
         </c:if>
 	<div class="button-group">
-    <form action="/maincontroller" method="get" class="button">
+    <form action="maincontroller" method="get" class="button">
         <button type="submit">投稿を表示</button>
     </form>
-    <form action="/managercontroller" method="get" class="admin-button">
+    <form action="managerpage" method="get" class="admin-button">
         <button type="submit">管理者画面へ</button>
     </form>
-    <form action="/post" method="get" class="post-button">
+    <form action="post" method="get" class="post-button">
         <button type="submit">投稿入力画面へ</button>
     </form>
+    <a href="mypage">マイページへ</a>
 	</div>
 	</div>
 	</div>
