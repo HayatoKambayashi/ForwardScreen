@@ -19,19 +19,27 @@ import jp.co.akkodis.syumix.dto.PostDto;
 @WebServlet("/mypage")
 public class MyPageController extends HttpServlet {
 	
-	//投稿内容を取得
+//投稿内容を取得
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
 	ServletException, IOException {
 		try (PostDao postDao = new PostDao()) {
-			String userId = (String) request.getSession().getAttribute("userId");
-//	    	ArrayList<PostDto> userPosts = postDao.selectByUser(userId);
-			ArrayList<PostDto> userPosts = postDao.selectByUser("100001");
-
+//			String userId = (String) request.getSession().getAttribute("userId");
+			UserDto userDto = (UserDto) request.getSession().getAttribute("loginUser");
+			int userid = userDto.getUserId(); 
+			String userId = Integer.toString(userid);
+			System.out.println("debug: " + userId);//debug
+			
+	    	ArrayList<PostDto> userPosts = postDao.selectByUser(userId);
+//			ArrayList<PostDto> userPosts = postDao.selectByUser("100001");
+			
+			
+	    	System.out.println("DAOおわった！");//debug
 	    	//ArrayList userPosts = postDao.selectByUser(request.getSession().getAttribute("userId"));
 	    	
 	    	//JSPに渡す
 			request.setAttribute("userPosts", userPosts);
+			System.out.println(userPosts);//debug
 			request.getRequestDispatcher("/mypage.jsp").forward(request, response);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO 自動生成された catch ブロック
