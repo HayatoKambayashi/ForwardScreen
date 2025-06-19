@@ -1,6 +1,7 @@
 package jp.co.akkodis.syumix;
 
 import jakarta.servlet.RequestDispatcher;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,7 +27,7 @@ public class PostController extends HttpServlet{
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		try (PostDao postDao = new PostDao()) {
 			ArrayList<GenreDto> allGenreList = postDao.getAllGenre(); // ジャンル一覧を取得
 			request.setAttribute("allGenreList", allGenreList);
@@ -57,7 +58,7 @@ public class PostController extends HttpServlet{
 		Date sqlDate = Date.valueOf(today);
 
 		// sprint1では投稿フォーム確認画面にいかずマイページ画面に遷移させる。
-		String jsp = "/mypage.jsp";	
+		String jsp = "/mypage";	
 		
 		try (PostDao post = new PostDao()) {
 			ArrayList<GenreDto> allGenreList = post.getAllGenre();
@@ -107,8 +108,10 @@ public class PostController extends HttpServlet{
 			jsp = "/postError.jsp";
 		}
 		System.out.println("OK");
+		doGet(request, response);
 		RequestDispatcher rd = request.getRequestDispatcher(jsp);
 		rd.forward(request, response);
+		System.out.println("OK");
 	}
 
 }
