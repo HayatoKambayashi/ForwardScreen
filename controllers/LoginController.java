@@ -47,6 +47,8 @@ public class LoginController extends HttpServlet {
 			}
 
 			//[IDまたはパスワードが未入力の場合]
+			System.out.println("inputUser "+inputUser);
+			System.out.println("inputPass "+inputPass);
 			if (inputUser == null || inputUser.isEmpty() ||
 					inputPass == null || inputPass.isEmpty() ) {
 				// リクエストにエラーメッセージを設定
