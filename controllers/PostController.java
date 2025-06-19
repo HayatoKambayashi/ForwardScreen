@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import jp.co.akkodis.syumix.dao.PostDao;
 import jp.co.akkodis.syumix.dto.PostDto;
+import jp.co.akkodis.syumix.dto.UserDto;
 import jp.co.akkodis.syumix.dto.GenreDto;
 
 /**
@@ -43,8 +44,8 @@ public class PostController extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String btn = request.getParameter("btn");   // どのボタンを押したかの情報
-		
-		int userId = (int) request.getSession().getAttribute("userId");    //入力情報たちの取得
+		UserDto userDto = (UserDto) request.getSession().getAttribute("loginUser");
+		int userId = userDto.getUserId();         //入力情報たちの取得
 		String genreCd = request.getParameter("genreCd");
 		String source = request.getParameter("source");
 		String image = request.getParameter("image");
@@ -56,12 +57,16 @@ public class PostController extends HttpServlet{
 		Date sqlDate = Date.valueOf(today);
 
 		// sprint1では投稿フォーム確認画面にいかずマイページ画面に遷移させる。
-		String jsp = "/mypage";	
+		String jsp = "/mypage.jsp";	
 		
 		try (PostDao post = new PostDao()) {
+			ArrayList<GenreDto> allGenreList = post.getAllGenre();
+		    request.setAttribute("allGenreList", allGenreList); // ← JSTLに必要！
+
+
 			if(btn != null && btn.equals("post")) {
 				PostDto postDto = new PostDto();
-			
+
 				if (genreCd != null && !genreCd.isEmpty()
 					&& ((source != null && !source.isEmpty())|| 
 						(image != null && !image.isEmpty()) ||
@@ -91,7 +96,7 @@ public class PostController extends HttpServlet{
 			
 		}catch (NumberFormatException e) {
 			request.setAttribute("errorMessage", "入力値が不正です");
-			jsp = "/insertError.jsp";	
+			jsp = "/postError.jsp";	
 		}catch (SQLException e) {
 			request.setAttribute("errorMessage", "JDBC のエラーです");
 			e.printStackTrace();
@@ -101,7 +106,7 @@ public class PostController extends HttpServlet{
 			request.setAttribute("errorMessage", "エラーが発生しました");
 			jsp = "/postError.jsp";
 		}
-		
+		System.out.println("OK");
 		RequestDispatcher rd = request.getRequestDispatcher(jsp);
 		rd.forward(request, response);
 	}

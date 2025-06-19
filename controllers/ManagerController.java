@@ -26,9 +26,7 @@ public class ManagerController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
+
 		try(UserDao userDao = new UserDao()) {
 			// ユーザ一覧を取得
 			ArrayList<UserDto> userList = null;

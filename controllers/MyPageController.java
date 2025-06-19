@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import jp.co.akkodis.syumix.dao.PostDao;
 import jp.co.akkodis.syumix.dto.PostDto;
+import jp.co.akkodis.syumix.dto.UserDto;
 
 /**
  * Servlet implementation class MyPageController
@@ -73,4 +74,3 @@ public class MyPageController extends HttpServlet {
 	    }
 	}
 }
-
