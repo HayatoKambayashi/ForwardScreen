@@ -30,10 +30,10 @@ public class ManagerController extends HttpServlet {
 		
 		
 		try(UserDao userDao = new UserDao()) {
+			// ユーザ一覧を取得
 			ArrayList<UserDto> userList = null;
 			userList = userDao.findAll();
 			
-			 // ユーザ一覧を取得
 			 // ユーザ情報をセットする
 		    request.setAttribute("userList", userList);
 		    request.getRequestDispatcher("/manager.jsp").forward(request, response); // JSPへ遷移
