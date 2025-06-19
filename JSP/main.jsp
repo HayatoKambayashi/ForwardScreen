@@ -27,7 +27,6 @@
     <form action="/post" method="get" class="post-button">
         <button type="submit">投稿入力画面へ</button>
     </form>
-	<a href="mypage">マイページへ</a>
 	</div>
 	</div>
 	</div>
