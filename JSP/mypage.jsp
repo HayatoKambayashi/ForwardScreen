@@ -17,9 +17,15 @@
 <table>
   <thead>
   <%
-  String temp = (String) request.getAttribute("deleteflug");
-  Boolean flug = Boolean.parseBoolean(temp);
-  if (flug == true) {
+  // String temp = (String) request.getAttribute("deleteflug");
+  // boolean flug = Boolean.parseboolean(temp);
+  //boolean flug = (boolean) request.getAttribute("deleteflug");
+  //out.println(flug);
+  //if (flug == true) {
+	Boolean flugObj = (Boolean) request.getAttribute("deleteflug");
+	boolean flug = (flugObj != null) ? flugObj : false;
+	if (flug) {
+
   %>
   
   <p><h3>削除しました。</h3></p>
@@ -52,13 +58,13 @@ if (list.size() > 0) {
       <tr>
         <td><%=post.getPostId() %></td>
         <td><%=post.getGenreCd() %></td>
-        <<td><%=post.getSource() %></td>
+        <td><%=post.getSource() %></td>
         <td><a href="<%=post.getUrl() %>"><%=post.getUrl() %></a></td>
         <td><img src="<%=post.getImage() %>" alt="投稿画像" /></td>
         <td>
           <form action="mypage" method="post">
-            <input type="hidden" name="postId" value=<%=post.getPostId()%>
-            <input type="submit" name="action" value="削除" />
+            <input type="hidden" name="postId" value=<%=post.getPostId()%>>
+			 <input type="submit" name="action" value="削除">
           </form>
         </td>
       </tr>
