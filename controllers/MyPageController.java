@@ -25,12 +25,18 @@ public class MyPageController extends HttpServlet {
 	ServletException, IOException {
 		try (PostDao postDao = new PostDao()) {
 			String userId = (String) request.getSession().getAttribute("userId");
+			System.out.println("debug: " + userId);//debug
+			
 	    	ArrayList<PostDto> userPosts = postDao.selectByUser(userId);
-
+//			ArrayList<PostDto> userPosts = postDao.selectByUser("100001");
+			
+			
+	    	System.out.println("DAOおわった！");//debug
 	    	//ArrayList userPosts = postDao.selectByUser(request.getSession().getAttribute("userId"));
 	    	
 	    	//JSPに渡す
 			request.setAttribute("userPosts", userPosts);
+			System.out.println(userPosts);//debug
 			request.getRequestDispatcher("/mypage.jsp").forward(request, response);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO 自動生成された catch ブロック
@@ -64,4 +70,3 @@ public class MyPageController extends HttpServlet {
 	    }
 	}
 }
-
