@@ -29,7 +29,7 @@ public class LoginController extends HttpServlet {
 		//新パス発行の真偽
 
 		//リクエストスコープのパラメータを取得する。
-		inputUser = request.getParameter("userid");
+		inputUser = request.getParameter("userId");
 		inputPass = request.getParameter("password");
 		
 		// 以下2行+tryブロックを追加（矢島）
@@ -47,8 +47,6 @@ public class LoginController extends HttpServlet {
 			}
 
 			//[IDまたはパスワードが未入力の場合]
-			System.out.println("inputUser "+inputUser);
-			System.out.println("inputPass "+inputPass);
 			if (inputUser == null || inputUser.isEmpty() ||
 					inputPass == null || inputPass.isEmpty() ) {
 				// リクエストにエラーメッセージを設定
@@ -60,10 +58,10 @@ public class LoginController extends HttpServlet {
 
 			UserDto user = userDao.selectById(inputUser);
 			response.setContentType("text/html; charset=UTF-8");
-
-			if ((user != null)) {
+			
+			if (user != null) {
 				//[認証エラーがある場合]
-				if ((""+user.getUserId() != inputUser) || (user.getPass() != inputPass)) {
+				if (!((""+user.getUserId()).equals(inputUser)) || !(user.getPass().equals(inputPass))) {
 					request.setAttribute("infoMessage", "従業員番号またはパスワードに誤りがあります。");
 					request.getRequestDispatcher("/login.jsp").forward(request, response);
 					return;
@@ -90,14 +88,13 @@ public class LoginController extends HttpServlet {
 						request.getRequestDispatcher("/main.jsp").forward(request, response);
 						return;
 					}
-
 				}
 			} else {
 				//!!!![データベーステーブルから取得したデータがnullもしくは不正な値の場合]
 				request.setAttribute("infoMessage", "ユーザテーブル、またはユーザDTOに問題があります。");
 				request.getRequestDispatcher("/login.jsp").forward(request, response);
 				return;
-			}
+			}			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("debug: userDaoのコンストラクタがうまくいきませんでした");
