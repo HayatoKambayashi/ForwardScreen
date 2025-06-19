@@ -10,7 +10,7 @@
 <table>
   <thead>
   <%
-  if (flug == true;) {
+  if (flug == true) {
   %>
   
   <p><h3>削除しました。</h3></p>
