@@ -14,7 +14,9 @@
 
             <label for="password">パスワード:</label><br>
             <input type="password" id="password" name="password" required><br>
-
+	    <p style="color: green;">
+       	      <%= request.getAttribute("infoMessage") != null ? request.getAttribute("infoMessage") : "" %>
+   	    </p>
             <input type="submit" value="ログイン">
         </form>
        </div>
