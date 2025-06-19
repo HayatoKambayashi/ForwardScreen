@@ -12,7 +12,7 @@
         <h2>パスワード変更</h2>
         <form action="login" method="post">
         <input type="hidden" name="id" value="1"> 
-        <input type="hidden" name="userId" value="<%=request.getAttribute("username");%>">
+        <input type="hidden" name="userId" value="<%=request.getAttribute("username")%>">
         
             <label for="currentPassword">新規パスワード:</label>
             <input type="text" id="currentPassword" name="password" required>
@@ -20,7 +20,7 @@
         </form>
 
         <%-- エラーメッセージがあれば表示 --%>
-        <% String msg = (String) request.getAttribute("message"); %>
+        <% String msg = (String) request.getAttribute("message");%>
         <% if (msg != null) { %>
             <p class="message"><%= msg %></p>
         <% } %>
