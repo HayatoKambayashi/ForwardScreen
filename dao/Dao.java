@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Dao implements AutoCloseable{
+public class Dao implements AutoCloseable {
 	protected Connection connection;
 	
 	/**
@@ -15,10 +15,12 @@ public class Dao implements AutoCloseable{
 	 */
 	public Dao()  throws ClassNotFoundException, SQLException {
 		String url = "jdbc:mysql://localhost/syumixdb";
+		//"jdbc:mysql://localhost/db"
 		String user = "root";
-		String password = "VSOLuser123456";
+		String password = "rmrm1312";
 		
 		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(url, user, password);
 			// TODO: Drivemanager
 		} catch (SQLException e) {
