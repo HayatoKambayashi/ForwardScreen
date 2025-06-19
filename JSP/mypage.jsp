@@ -9,6 +9,11 @@
 <title>MyPage</title>
 </head>
 <body>
+
+<form action="main.jsp" method="get">
+    <input type="submit" value="メインメニューへ">
+</form>
+
 <table>
   <thead>
   <%
@@ -48,12 +53,11 @@ if (list.size() > 0) {
         <td><%=post.getPostId() %></td>
         <td><%=post.getGenreCd() %></td>
         <<td><%=post.getSource() %></td>
-        <td><%=post.getUrl() %></td>
-        <td><%=post.getImage() %></td>
+        <td><a href="<%=post.getUrl() %>"><%=post.getUrl() %></a></td>
+        <td><img src="<%=post.getImage() %>" alt="投稿画像" /></td>
         <td>
           <form action="mypage" method="post">
             <input type="hidden" name="postId" value=<%=post.getPostId()%>
-            <input type="submit" name="action" value="メインページへ" />
             <input type="submit" name="action" value="削除" />
           </form>
         </td>
