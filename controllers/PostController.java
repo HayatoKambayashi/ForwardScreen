@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -27,7 +28,12 @@ public class PostController extends HttpServlet{
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// セッションチェック
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("loginUser") == null) {
+		response.sendRedirect("login.jsp"); // ログインページへリダイレクト
+		return;
+		}
 		try (PostDao postDao = new PostDao()) {
 			ArrayList<GenreDto> allGenreList = postDao.getAllGenre(); // ジャンル一覧を取得
 			request.setAttribute("allGenreList", allGenreList);
@@ -43,6 +49,13 @@ public class PostController extends HttpServlet{
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// セッションチェック
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("loginUser") == null) {
+		response.sendRedirect("login.jsp"); // ログインページへリダイレクト
+		return;
+		}
 		request.setCharacterEncoding("UTF-8");
 		String btn = request.getParameter("btn");   // どのボタンを押したかの情報
 		UserDto userDto = (UserDto) request.getSession().getAttribute("loginUser");
