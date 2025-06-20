@@ -10,7 +10,7 @@ CREATE TABLE user (
 	,userName    VARCHAR(15) NOT NULL COMMENT '氏名'
 	,pass        VARCHAR(20) NOT NULL COMMENT 'パスワード' DEFAULT '0000'
 	,retiredFlag boolean     NOT NULL COMMENT '退職フラグ' DEFAULT FALSE
-	,passFlag    boolean              COMMENT '仮パス発行フラグ' DEFAULT FALSE
+	,passFlag    boolean              COMMENT '仮パス発行フラグ' DEFAULT TRUE
 	,PRIMARY KEY( userId )
 ) AUTO_INCREMENT = 100000;
 
