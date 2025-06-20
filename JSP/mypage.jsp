@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>MyPage</title>
+<link rel="stylesheet" href="mypageStyle.css">
 </head>
 <body>
 
