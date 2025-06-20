@@ -40,6 +40,17 @@ public class LoginController extends HttpServlet {
 		
 		try (UserDao userDao = new UserDao()){
 			if ( !(passChangeFlag.equals("0")) ) { // 追加事項A
+				
+
+				// パスワードの長さチェック
+				if (inputPass.length() > 20) {
+				request.setAttribute("message", "パスワードは20文字以内で入力してください。");
+				request.setAttribute("username", inputUser); // 入力値を保持
+				request.getRequestDispatcher("/passChange.jsp").forward(request, response);
+				return;
+				}
+
+				
 				userDao.updatePassword(inputPass, inputUser);
 				request.getRequestDispatcher("/main.jsp").forward(request, response);
 				// mainに遷移する。
