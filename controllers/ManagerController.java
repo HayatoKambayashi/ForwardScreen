@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import jp.co.akkodis.syumix.dao.UserDao;
 import jp.co.akkodis.syumix.dto.UserDto;
@@ -26,7 +27,17 @@ public class ManagerController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 
+		// セッションチェック
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("loginUser") == null) {
+		response.sendRedirect("login.jsp"); // ログインページへリダイレクト
+		return;
+		}
+
+		
+		
 		try(UserDao userDao = new UserDao()) {
 			// ユーザ一覧を取得
 			ArrayList<UserDto> userList = null;
@@ -50,8 +61,17 @@ public class ManagerController extends HttpServlet {
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    String userId = request.getParameter("userId");
 	    
+
+		// セッションチェック
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("loginUser") == null) {
+		response.sendRedirect("login.jsp"); // ログインページへリダイレクト
+		return;
+		}
+
+		
+		String userId = request.getParameter("userId");
 	    System.out.println(userId);
 	    
 
