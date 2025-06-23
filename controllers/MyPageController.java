@@ -25,6 +25,14 @@ public class MyPageController extends HttpServlet {
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
 	ServletException, IOException {
+
+		// セッションチェック
+	    	HttpSession session = request.getSession(false);
+    		if (session == null || session.getAttribute("loginUser") == null) {
+    			response.sendRedirect("login.jsp"); // ログインページへリダイレクト
+    			return;
+    		}
+		
 		try (PostDao postDao = new PostDao()) {
 //			String userId = (String) request.getSession().getAttribute("userId");
 			UserDto userDto = (UserDto) request.getSession().getAttribute("loginUser");
