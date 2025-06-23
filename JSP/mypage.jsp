@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, jp.co.akkodis.syumix.dto.UserDto, jp.co.akkodis.syumix.dto.PostDto, , jp.co.akkodis.syumix.dto.GenreDto" %>
+<%@ page import="java.util.*, jp.co.akkodis.syumix.dto.UserDto, jp.co.akkodis.syumix.dto.PostDto, jp.co.akkodis.syumix.dto.GenreDto" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -8,6 +8,19 @@
 <meta charset="UTF-8">
 <title>MyPage</title>
 <link rel="stylesheet" href="mypageStyle.css">
+
+<script>
+function showConfirm(postId) {
+    const confirmBox = document.getElementById("confirm-" + postId);
+    confirmBox.style.display = "block";
+}
+
+function hideConfirm(postId) {
+    const confirmBox = document.getElementById("confirm-" + postId);
+    confirmBox.style.display = "none";
+}
+</script>
+
 </head>
 <%
 	//セッションチェック：ログイン状況が取得できない場合、login.jspに飛ばす
@@ -76,12 +89,20 @@ if (list.size() > 0) {
         <td><%=post.getSource() %></td>
         <td><a href="<%=post.getUrl() %>"><%=post.getUrl() %></a></td>
         <td><img src="<%=post.getImage() %>" alt="投稿画像" /></td>
-        <td>
-          <form action="mypage" method="post">
-            <input type="hidden" name="postId" value=<%=post.getPostId()%>>
-			 <input type="submit" name="action" value="削除">
-          </form>
-        </td>
+		<td>
+		  <!-- 削除ボタン（確認表示用） -->
+		  <button type="button" onclick="showConfirm(<%=post.getPostId()%>)">削除</button>
+		
+		  <!-- 確認エリア（初期は非表示） -->
+		  <div id="confirm-<%=post.getPostId()%>" style="display: none; margin-top: 5px;">
+		    <form action="mypage" method="post" style="display: inline;">
+		      <input type="hidden" name="postId" value="<%=post.getPostId()%>">
+		      <input type="submit" name="action" value="はい、削除します">
+		    </form>
+		    <button type="button" onclick="hideConfirm(<%=post.getPostId()%>)">キャンセル</button>
+		  </div>
+		</td>
+
       </tr>
       
 <%
