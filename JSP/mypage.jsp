@@ -58,14 +58,21 @@
 <%
 Object obj = request.getAttribute("userPosts");
 ArrayList<PostDto> list = (ArrayList<PostDto>) obj;
+ArrayList<GenreDto> allGenre = (ArrayList<GenreDto>) request.getAttribute("allGenre");
+String genreName;
 if (list.size() > 0) {
 	Iterator<PostDto> it = list.iterator();
 	while (it.hasNext()) {
 		PostDto post = it.next();
+		for (GenreDto eachGenre : allGenre) {
+			if (eachGenre.getGenreCd().equals(post.getGenreCd())) {
+				genreName = eachGenre.getGenreName();
 %>
       <tr>
         <td><%=post.getPostId() %></td>
-        <td><%=post.getGenreCd() %></td>
+
+
+        <td><%= genreName %></td>
         <td><%=post.getSource() %></td>
         <td><a href="<%=post.getUrl() %>"><%=post.getUrl() %></a></td>
         <td><img src="<%=post.getImage() %>" alt="投稿画像" /></td>
@@ -78,6 +85,8 @@ if (list.size() > 0) {
       </tr>
       
 <%
+			} // if文
+		} // 拡張for文
 	} // whileループ
 } // if
 %>
