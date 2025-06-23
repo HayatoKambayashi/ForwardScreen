@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import jp.co.akkodis.syumix.dao.PostDao;
 import jp.co.akkodis.syumix.dto.GenreDto;
@@ -69,7 +70,7 @@ public class MyPageController extends HttpServlet {
 		String action = request.getParameter("action");
 		boolean flug = true;
 		
-		if ("削除".equals(action)) { //削除ボタンを押した場合
+		if ("はい、削除します".equals(action)) { //削除ボタンを押した場合
 			int postID = Integer.parseInt(request.getParameter("postId"));
 			
 			try (PostDao postDao = new PostDao()) {
@@ -84,6 +85,7 @@ public class MyPageController extends HttpServlet {
 		    	ArrayList<PostDto> userPosts = postDao.selectByUser(userId);
 //				ArrayList<PostDto> userPosts = postDao.selectByUser("100001");
 				
+		    	
 				
 //		    	System.out.println("DAOおわった！");//debug
 		    	//ArrayList userPosts = postDao.selectByUser(request.getSession().getAttribute("userId"));
@@ -94,7 +96,7 @@ public class MyPageController extends HttpServlet {
 				// 投稿のジャンル名取得
 				ArrayList<GenreDto> allGenre = postDao.getAllGenre();
 				request.setAttribute("allGenre", allGenre);
-
+			
 		        request.getRequestDispatcher("/mypage.jsp").forward(request, response);
 		        
 			} catch (ClassNotFoundException | SQLException e) {
