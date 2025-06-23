@@ -51,3 +51,14 @@
     </c:forEach>
 
 </table>
+	</form>
+	<form action="${pageContext.request.contextPath}/logout" method="get">
+    <button type="submit">ログアウト</button>
+	</form>
+
+<!--		<form action="main.jsp" method="get">-->
+<!--    		<input type="submit" value="戻る">-->
+<!--		</form>-->
+	
+</body>
+</html>	
