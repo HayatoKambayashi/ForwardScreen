@@ -14,12 +14,7 @@
 <div class="wrapper">
     <div class="container">
         <h2>投稿</h2>
-		<c:if test="${data.anonyFlag}">
-    		<p>氏名: unknown</p>
-		</c:if>
-		<c:if test="${!data.anonyFlag}">
-    		<p>氏名: ${name}</p>
-		</c:if>
+    	<p>氏名: ${name}</p>
     	<p>ジャンル: ${genreName}</p>
 
 		<c:if test="${not empty data.url}">
@@ -44,6 +39,10 @@
     <form action="mypage" method="get" class="mypage-button">
     <button type="submit">マイページへ</button>
 	</form>
+	<form action="${pageContext.request.contextPath}/logout" method="get">
+    <button type="submit">ログアウト</button>
+	</form>
+	
 	</div>
 	</div>
 	</div>
