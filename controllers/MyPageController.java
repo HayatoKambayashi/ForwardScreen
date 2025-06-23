@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import jp.co.akkodis.syumix.dao.PostDao;
+import jp.co.akkodis.syumix.dto.GenreDto;
 import jp.co.akkodis.syumix.dto.PostDto;
 import jp.co.akkodis.syumix.dto.UserDto;
 
@@ -29,18 +30,23 @@ public class MyPageController extends HttpServlet {
 			UserDto userDto = (UserDto) request.getSession().getAttribute("loginUser");
 			int userid = userDto.getUserId(); 
 			String userId = Integer.toString(userid);
-			System.out.println("debug: " + userId);//debug
+//			System.out.println("debug: " + userId);//debug
 			
 	    	ArrayList<PostDto> userPosts = postDao.selectByUser(userId);
 //			ArrayList<PostDto> userPosts = postDao.selectByUser("100001");
 			
 			
-	    	System.out.println("DAOおわった！");//debug
+//	    	System.out.println("DAOおわった！");//debug
 	    	//ArrayList userPosts = postDao.selectByUser(request.getSession().getAttribute("userId"));
 	    	
 	    	//JSPに渡す
 			request.setAttribute("userPosts", userPosts);
-			System.out.println(userPosts);//debug
+			
+			// 投稿のジャンル名取得
+			ArrayList<GenreDto> allGenre = postDao.getAllGenre();
+			request.setAttribute("allGenre", allGenre);
+			
+//			System.out.println(userPosts);//debug
 			request.getRequestDispatcher("/mypage.jsp").forward(request, response);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO 自動生成された catch ブロック
@@ -61,7 +67,7 @@ public class MyPageController extends HttpServlet {
 			try (PostDao postDao = new PostDao()) {
 				postDao.delete(postID);
 		        request.setAttribute("deleteflug", flug);
-		        //ここから
+
 		        UserDto userDto = (UserDto) request.getSession().getAttribute("loginUser");
 				int userid = userDto.getUserId(); 
 				String userId = Integer.toString(userid);
@@ -76,7 +82,11 @@ public class MyPageController extends HttpServlet {
 		    	
 		    	//JSPに渡す
 				request.setAttribute("userPosts", userPosts);
-				//ここまで
+				
+				// 投稿のジャンル名取得
+				ArrayList<GenreDto> allGenre = postDao.getAllGenre();
+				request.setAttribute("allGenre", allGenre);
+
 		        request.getRequestDispatcher("/mypage.jsp").forward(request, response);
 		        
 			} catch (ClassNotFoundException | SQLException e) {
