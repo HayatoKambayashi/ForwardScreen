@@ -24,7 +24,7 @@ public class ManagerController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		// セッションチェック
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("manager") == null) {
@@ -54,8 +54,6 @@ public class ManagerController extends HttpServlet {
 			e.printStackTrace();
 		}
 
-
-		
 		
 	}
 	
