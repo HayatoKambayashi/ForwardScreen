@@ -21,6 +21,13 @@ import jp.co.akkodis.syumix.dto.PostDto;
 public class MainController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// セッションチェック
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("loginUser") == null) {
+			response.sendRedirect("login.jsp"); // ログインページへリダイレクト
+			return;
+		}
 		String link = "main.jsp";
 		
 		try (PostDao postDao = new PostDao()){
