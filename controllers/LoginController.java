@@ -80,11 +80,19 @@ public class LoginController extends HttpServlet {
 			UserDto user = userDao.selectById(inputUser);
 			response.setContentType("text/html; charset=UTF-8");
 			
-			if (user != null) {
-				// 管理者がログインした場合
-				if (user.getUserId() == 100000) {
-					response.sendRedirect("managerpage");
-					return;
+			// 管理者がログインした場合
+				if (user.getUserId() == 100000 && user.getPass().equals(inputPass)) { 
+					if (user.getPassFlag()) { // 仮パス設定フラグがtrueの場合
+						HttpSession session = request.getSession();
+						request.setAttribute("username", inputUser);
+						request.getRequestDispatcher("/passChange.jsp").forward(request, response);
+						return;
+					} else {
+						HttpSession session = request.getSession();
+						response.sendRedirect("managerpage");
+						return;
+					}
+					
 				} else
 				//[認証エラーがある場合]
 				if (!((""+user.getUserId()).equals(inputUser)) || !(user.getPass().equals(inputPass))) {
