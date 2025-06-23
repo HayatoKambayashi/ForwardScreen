@@ -8,6 +8,7 @@ public class UserDto {
 	private boolean retiredFlag;
 	private boolean passFlag;
 	private boolean managerFlag;
+	public static final int MANAGER_ID = 100000;
 	
 	// getter, setter
 	/*
