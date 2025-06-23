@@ -8,6 +8,14 @@
 <title>投稿フォーム入力ページ</title>
 <link rel="stylesheet" href="postStyle.css">
 </head>
+<%
+	//セッションチェック：ログイン状況が取得できない場合、login.jspに飛ばす
+	session = request.getSession(false);
+	if (session == null || session.getAttribute("loginUser") == null) {
+		response.sendRedirect("login.jsp");
+		return;
+	}
+%>
 <body>
 	<header>
 		<h1>投稿フォーム入力ページ</h1>
