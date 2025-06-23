@@ -6,8 +6,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -16,18 +14,10 @@ import jp.co.akkodis.syumix.dto.PostDto;
 /**
  * Servlet implementation class mainController
  */
-@WebServlet("/maincontroller")
+@WebServlet("/top")
 public class MainController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// セッションチェック
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("loginUser") == null) {
-			response.sendRedirect("login.jsp"); // ログインページへリダイレクト
-			return;
-		}
-		
 		String link = "main.jsp";
 		
 		try (PostDao postDao = new PostDao()){
@@ -35,7 +25,6 @@ public class MainController extends HttpServlet {
 			PostDto data  = postDao.pick();
 			// データをリクエストに送る
 			request.setAttribute("data", data);
-			
 			// データをmain.jspに送る
 			RequestDispatcher dispatcher = request.getRequestDispatcher(link);
 			dispatcher.forward(request, response);
