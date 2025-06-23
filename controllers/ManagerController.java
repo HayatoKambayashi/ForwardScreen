@@ -1,8 +1,10 @@
 package jp.co.akkodis.syumix;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import jakarta.servlet.ServletException;
-
-
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,11 +13,6 @@ import jakarta.servlet.http.HttpSession;
 
 import jp.co.akkodis.syumix.dao.UserDao;
 import jp.co.akkodis.syumix.dto.UserDto;
-
-import java.io.IOException;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
 /**
  * Servlet implementation class ManagerController
  */
