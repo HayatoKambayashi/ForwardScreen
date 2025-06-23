@@ -8,13 +8,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-import jp.co.akkodis.syumix.dao.PostDao; 
+import jp.co.akkodis.syumix.dao.PostDao;
+import jp.co.akkodis.syumix.dao.UserDao;
+import jp.co.akkodis.syumix.dto.GenreDto;
 import jp.co.akkodis.syumix.dto.PostDto; 
 /**
  * Servlet implementation class mainController
  */
-@WebServlet("/top")
+@WebServlet("/maincontroller")
 public class MainController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,6 +28,22 @@ public class MainController extends HttpServlet {
 			PostDto data  = postDao.pick();
 			// データをリクエストに送る
 			request.setAttribute("data", data);
+			
+			// 氏名情報をリクエストに送る
+			UserDao userDao = new UserDao();
+			request.setAttribute("name", userDao.selectById(Integer.toString(data.getUserId())).getUserName());
+			userDao.close();
+			
+			// 投稿のジャンル情報を送る
+			ArrayList<GenreDto> allGenre = postDao.getAllGenre();
+			String genreName = null;
+			for (GenreDto eachGenre : allGenre) {
+				if (eachGenre.getGenreCd().equals(data.getGenreCd())) {
+					genreName = eachGenre.getGenreName();
+				}
+			}
+			request.setAttribute("genreName", genreName);
+			
 			// データをmain.jspに送る
 			RequestDispatcher dispatcher = request.getRequestDispatcher(link);
 			dispatcher.forward(request, response);
