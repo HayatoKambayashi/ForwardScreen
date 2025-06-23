@@ -29,7 +29,7 @@ public class ManagerController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// セッションチェック
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("manager") == null) {
 			if (session.getAttribute("loginUser") == null) {
 				// ログインユーザ情報がない場合。
