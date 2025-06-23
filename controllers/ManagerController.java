@@ -26,6 +26,20 @@ public class ManagerController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// セッションチェック
+		HttpSession session = request.getSession();
+		if (session == null || session.getAttribute("manager") == null) {
+			if (session.getAttribute("loginUser") == null) {
+				// ログインユーザ情報がない場合。
+				response.sendRedirect("login.jsp");
+				return;
+			} else { // ある場合
+				response.sendRedirect("maincontroller");
+				return;
+			}
+		}
+		
 		try(UserDao userDao = new UserDao()) {
 			// ユーザ一覧を取得
 			ArrayList<UserDto> userList = null;
