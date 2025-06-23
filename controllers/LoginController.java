@@ -97,7 +97,6 @@ public class LoginController extends HttpServlet {
 			// 管理者がログインした場合
 			if (user.getUserId() == UserDto.MANAGER_ID && user.getPass().equals(inputPass)) { 
 				if (user.getPassFlag()) { // 仮パス設定フラグがtrueの場合
-					HttpSession session = request.getSession();
 					request.setAttribute("username", inputUser);
 					request.getRequestDispatcher("/passChange.jsp").forward(request, response);
 					return;
@@ -108,7 +107,7 @@ public class LoginController extends HttpServlet {
 					return;
 				}
 				
-			} else
+			}
 			//[認証エラーがある場合]
 			if (!((""+user.getUserId()).equals(inputUser)) || !(user.getPass().equals(inputPass))) {
 				request.setAttribute("infoMessage", "従業員番号またはパスワードに誤りがあります。");
