@@ -27,7 +27,7 @@ public class ManagerController extends HttpServlet {
 		
 		// セッションチェック
 		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("manager") == null) {
+		if (session.getAttribute("manager") == null) {
 			if (session.getAttribute("loginUser") == null) {
 				// ログインユーザ情報がない場合。
 				response.sendRedirect("login.jsp");
