@@ -9,8 +9,15 @@
 <title>MyPage</title>
 <link rel="stylesheet" href="mypageStyle.css">
 </head>
+<%
+	//セッションチェック：ログイン状況が取得できない場合、login.jspに飛ばす
+	session = request.getSession(false);
+	if (session == null || session.getAttribute("loginUser") == null) {
+		response.sendRedirect("login.jsp");
+		return;
+	}
+%>
 <body>
-
 <form action="main.jsp" method="get">
     <input type="submit" value="メインメニューへ">
 </form>
