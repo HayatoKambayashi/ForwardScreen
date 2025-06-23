@@ -123,15 +123,12 @@ public class LoginController extends HttpServlet {
 						return;
 					}
 				}
-			} else {
-				//!!!![データベーステーブルから取得したデータがnullもしくは不正な値の場合]
-				request.setAttribute("infoMessage", "ユーザテーブル、またはユーザDTOに問題があります。");
-				request.getRequestDispatcher("/login.jsp").forward(request, response);
-				return;
-			}			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("debug: userDaoのコンストラクタがうまくいきませんでした");
+			//!!!![データベーステーブルから取得したデータがnullもしくは不正な値の場合]
+			request.setAttribute("infoMessage", "ユーザテーブル、またはユーザDTOに問題があります。");
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			return;
 		}
 
 	}
