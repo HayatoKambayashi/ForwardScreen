@@ -125,4 +125,24 @@ public class UserDao extends Dao{
 		return result;
 	}
 
+	public int updateRetired (String userId) throws SQLException {
+		
+		String sql = "UPDATE user SET retiredFlag = true, userName = 'unknown'"
+				+ "WHERE userid = ? ;" ; // 準備中のSQL
+		// WHERE文で主キーを指定することで1つのみ更新予定
+		
+		int result = 0;
+		
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, userId); // 引数を現在準備中のSQL文に入れ込んだ。
+			result = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 }
