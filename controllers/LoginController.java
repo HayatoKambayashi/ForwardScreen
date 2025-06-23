@@ -32,7 +32,6 @@ public class LoginController extends HttpServlet {
 		inputUser = request.getParameter("userId");
 		inputPass = request.getParameter("password");
 		
-		// 以下2行+tryブロックを追加（矢島）
 		passChangeFlag = request.getParameter("id");
 		if (passChangeFlag == null) { // [42行目付近if文と関連]
 			passChangeFlag = "0";
