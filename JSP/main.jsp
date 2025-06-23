@@ -14,9 +14,8 @@
 <div class="wrapper">
     <div class="container">
         <h2>投稿</h2>
-        <c:if test="${not empty data.userId}">
-    			<p>UserID: ${data.userId}</p>
-		</c:if>
+    	<p>氏名: ${name}</p>
+    	<p>ジャンル: ${genreName}</p>
 
 		<c:if test="${not empty data.url}">
     		<p>URL: <a href="${data.url}" target="_blank">${data.url}</a></p>
@@ -31,7 +30,7 @@
 		</c:if>
 
 	<div class="button-group">
-    <form action="top" method="get" class="button">
+    <form action="maincontroller" method="get" class="button">
         <button type="submit">投稿を表示</button>
     </form>
     <form action="post" method="get" class="post-button">
