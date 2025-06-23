@@ -7,6 +7,15 @@
 <title>password change</title>
 <link rel="stylesheet" href="loginStyle.css">
 </head>
+<%
+	//セッションチェック：ログイン状況が取得できない場合、login.jspに飛ばす
+	session = request.getSession(false);
+	if (session == null || session.getAttribute("loginUser") == null) {
+		response.sendRedirect("login.jsp");
+		return;
+	}
+%>
+
 <body>
     <div class="login-container">
         <h2>パスワード変更</h2>
