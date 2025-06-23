@@ -34,13 +34,25 @@ public class LoginController extends HttpServlet {
 		
 		// 以下2行+tryブロックを追加（矢島）
 		passChangeFlag = request.getParameter("id");
-		if (passChangeFlag == null) {
+		if (passChangeFlag == null) { // [42行目付近if文と関連]
 			passChangeFlag = "0";
 		}
 		
 		try (UserDao userDao = new UserDao()){
-			if ( !(passChangeFlag.equals("0")) ) { // 追加事項A
+			if ( !(passChangeFlag.equals("0")) ) { // [3７行目付近if文と関連]
+
+				// [不要かも]セッションチェック：ログイン状況が取得できない場合、login.jspに飛ばす
+				HttpSession session = request.getSession(false);
+				if (session == null || session.getAttribute("loginUser") == null) {
+					response.sendRedirect("login.jsp");
+					return;
+				}
 				
+				// TODO : パスワード欄二つの入力内容に同一のPWが入っていないとき
+				// ↓の箇所にifブロックを設置し、
+//				if (false) {
+//					request.setAttribute("username", inputUser); // 入力値を保持
+//				}
 
 				// パスワードの長さチェック
 				if (inputPass.length() > 20) {
@@ -71,11 +83,6 @@ public class LoginController extends HttpServlet {
 			response.setContentType("text/html; charset=UTF-8");
 			
 			if (user != null) {
-				// 管理者がログインした場合
-				if (user.getUserId() == 100000) {
-					response.sendRedirect("managerpage");
-					return;
-				} else
 				//[認証エラーがある場合]
 				if (!((""+user.getUserId()).equals(inputUser)) || !(user.getPass().equals(inputPass))) {
 					request.setAttribute("infoMessage", "従業員番号またはパスワードに誤りがあります。");
