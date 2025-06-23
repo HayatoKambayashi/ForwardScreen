@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+/* 全体のスタイル */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9f9;
+  margin: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.wrapper {
+width: 100%;
+border-collapse: collapse;
+background-color: #fff;
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+margin-top: 20px;
+}
+
+
+/* 見出し */
+h2 {
+	color: rgb(0, 0, 128);
+	text-align: center;
+}
+
+/* メッセージ表示 */
+p {
+    text-align: center;
+    font-size: 16px;
+    color: rgb(255, 0, 0);
+}
+
+/* テーブルのスタイル */
+table {
+    width: 80%;
+    margin: 0 auto 30px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: rgb(0, 0, 128);
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* ボタンとフォーム */
+form {
+
+	display: flex;
+	justify-content:center;
+}
+
+input[type="submit"], button {
+    background-color: rgb(0, 0, 128);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+	display: flex;
+	justify-content:center;
+	
+}
+
+
