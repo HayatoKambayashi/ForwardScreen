@@ -61,7 +61,6 @@ public class LoginController extends HttpServlet {
 				return;
 				}
 
-				
 				userDao.updatePassword(inputPass, inputUser);
 				request.getRequestDispatcher("/main.jsp").forward(request, response);
 				// mainに遷移する。
@@ -82,6 +81,11 @@ public class LoginController extends HttpServlet {
 			response.setContentType("text/html; charset=UTF-8");
 			
 			if (user != null) {
+				// 管理者がログインした場合
+				if (user.getUserId() == 100000) {
+					response.sendRedirect("managerpage");
+					return;
+				} else
 				//[認証エラーがある場合]
 				if (!((""+user.getUserId()).equals(inputUser)) || !(user.getPass().equals(inputPass))) {
 					request.setAttribute("infoMessage", "従業員番号またはパスワードに誤りがあります。");
