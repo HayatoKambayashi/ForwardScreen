@@ -12,6 +12,7 @@
 <h2>ユーザ一覧</h2>
 
    <!-- ユーザの一覧表示 -->
+   <!-- messageがあった場合表示 -->
     <p style="color: green;">
         <%= request.getAttribute("message") != null ? request.getAttribute("message") : "" %>
     </p>
@@ -24,6 +25,7 @@
         <th>在籍管理</th>
     </tr>
 
+	<!-- 一覧を1行ずつ表示 -->
     <c:forEach var="user" items="${userList}">
         <tr>
             <td>${user.userId}</td>
@@ -34,6 +36,8 @@
                     <input type="submit" name="btn" value="発行" />
                 </form>
             </td>
+            
+            <!-- retiredFlagがfalse(在籍中)の場合のみ「退職」ボタンを表示 -->
             <c:if test="${not user.retiredFlag}">
             <td>
                 <form action="managerpage" method="post">
@@ -47,10 +51,3 @@
     </c:forEach>
 
 </table>
-
-<!--		<form action="main.jsp" method="get">-->
-<!--    		<input type="submit" value="戻る">-->
-<!--		</form>-->
-	
-</body>
-</html>	
