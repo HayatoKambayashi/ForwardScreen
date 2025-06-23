@@ -14,7 +14,12 @@
 <div class="wrapper">
     <div class="container">
         <h2>投稿</h2>
-    	<p>氏名: ${name}</p>
+		<c:if test="${data.anonyFlag}">
+    		<p>氏名: unknown</p>
+		</c:if>
+		<c:if test="${!data.anonyFlag}">
+    		<p>氏名: ${name}</p>
+		</c:if>
     	<p>ジャンル: ${genreName}</p>
 
 		<c:if test="${not empty data.url}">

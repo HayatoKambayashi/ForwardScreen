@@ -47,7 +47,7 @@
 					<td>
 						<form action="insert" method="post">
 						<label>
-						<input type="checkbox" name="anonyFlag" value="false"> Yes
+						<input type="checkbox" name="anonyFlag" value="true"> Yes
 						</label>
 						</form>
 					</td>
