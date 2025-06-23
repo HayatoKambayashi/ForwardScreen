@@ -48,9 +48,9 @@
 
 </table>
 
-		<form action="main.jsp" method="get">
-    		<input type="submit" value="戻る">
-		</form>
+<!--		<form action="main.jsp" method="get">-->
+<!--    		<input type="submit" value="戻る">-->
+<!--		</form>-->
 	
 </body>
 </html>	
