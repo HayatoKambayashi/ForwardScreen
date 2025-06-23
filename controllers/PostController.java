@@ -92,6 +92,11 @@ public class PostController extends HttpServlet{
 					postDto.setImage(image);
 					postDto.setUrl(url);
 					postDto.setDate(sqlDate);
+					if (Boolean.parseBoolean(request.getParameter("anonyFlag")) == true) {
+						postDto.setAnonyFlag(true);
+					} else {
+						postDto.setAnonyFlag(false);
+					}
 						
 					int insertCount = post.insert(postDto);
 					
@@ -120,11 +125,9 @@ public class PostController extends HttpServlet{
 			request.setAttribute("errorMessage", "エラーが発生しました");
 			jsp = "/postError.jsp";
 		}
-		System.out.println("OK");
 		doGet(request, response);
 		RequestDispatcher rd = request.getRequestDispatcher(jsp);
 		rd.forward(request, response);
-		System.out.println("OK");
 	}
 
 }
