@@ -31,8 +31,8 @@ public class PostController extends HttpServlet{
 		// セッションチェック
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("loginUser") == null) {
-		response.sendRedirect("login.jsp"); // ログインページへリダイレクト
-		return;
+			response.sendRedirect("login.jsp"); // ログインページへリダイレクト
+			return;
 		}
 		try (PostDao postDao = new PostDao()) {
 			ArrayList<GenreDto> allGenreList = postDao.getAllGenre(); // ジャンル一覧を取得
