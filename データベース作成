@@ -35,6 +35,7 @@ CREATE TABLE genre (
 );
 
 -- ユーザーテーブルにレコードを追加
+INSERT INTO user (userName) VALUES ('管理者');
 INSERT INTO user (userName) VALUES ('平松里彩');
 INSERT INTO user (userName) VALUES ('上林隼');
 INSERT INTO user (userName) VALUES ('矢島史生');
