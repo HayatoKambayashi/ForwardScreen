@@ -98,6 +98,8 @@ public class LoginController extends HttpServlet {
 			if (user.getUserId() == UserDto.MANAGER_ID && user.getPass().equals(inputPass)) { 
 				if (user.getPassFlag()) { // 仮パス設定フラグがtrueの場合
 					request.setAttribute("username", inputUser);
+					HttpSession session = request.getSession();
+					session.setAttribute("manager", inputUser);
 					request.getRequestDispatcher("/passChange.jsp").forward(request, response);
 					return;
 				} else {
