@@ -11,7 +11,7 @@
 <%
 	//セッションチェック：ログイン状況が取得できない場合、login.jspに飛ばす
 	session = request.getSession(false);
-	if (session == null || session.getAttribute("loginUser") == null) {
+	if (session == null || session.getAttribute("loginUser") == null || session.getAttribute("manager") == null) {
 		response.sendRedirect("login.jsp");
 		return;
 	}
