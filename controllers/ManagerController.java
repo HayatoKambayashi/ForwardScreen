@@ -7,7 +7,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import jp.co.akkodis.syumix.dao.UserDao;
 import jp.co.akkodis.syumix.dto.UserDto;
@@ -27,17 +26,6 @@ public class ManagerController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-
-		// セッションチェック
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("loginUser") == null) {
-		response.sendRedirect("login.jsp"); // ログインページへリダイレクト
-		return;
-		}
-
-		
-		
 		try(UserDao userDao = new UserDao()) {
 			// ユーザ一覧を取得
 			ArrayList<UserDto> userList = null;
@@ -61,26 +49,22 @@ public class ManagerController extends HttpServlet {
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    
-
-		// セッションチェック
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("loginUser") == null) {
-		response.sendRedirect("login.jsp"); // ログインページへリダイレクト
-		return;
-		}
-
-		
-		String userId = request.getParameter("userId");
+	    String userId = request.getParameter("userId");
+	    String btn = request.getParameter("btn");
 	    System.out.println(userId);
 	    
 
 	    // userId を使ってパスワード発行処理を行う
 		try(UserDao userDao = new UserDao()) {
-			userDao.setKariPassword(userId);
 			
+			if (btn.equals("発行")) {
+				userDao.setKariPassword(userId);
 			   // 処理後に画面遷移やメッセージ表示など
-		    request.setAttribute("message", "ユーザー " + userId + " のパスワードを発行しました。");
+				request.setAttribute("message", "ユーザー " + userId + " のパスワードを発行しました。");
+			} else if (btn.equals("退職")) {
+				userDao.updateRetired(userId);
+				request.setAttribute("message", "ユーザー " + userId + " の退職処理が完了しました。");
+			}
 		    doGet(request,response);
 		    request.getRequestDispatcher("/manager.jsp").forward(request, response);
 		} catch (ClassNotFoundException e) {
