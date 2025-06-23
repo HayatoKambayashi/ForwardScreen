@@ -14,6 +14,7 @@
 	</header>
 	<main>
  		<p class="message"><c:out value="${message}"/></p>
+ 		<p><a href="mypage">マイページへ</a></p>
 		<form action="post" method="post">
 			<table border="1">
 				<tr>
@@ -47,7 +48,7 @@
 					<td>
 						<form action="insert" method="post">
 						<label>
-						<input type="checkbox" name="anonyFlag" value="true"> Yes
+						<input type="checkbox" name="anonyFlag" value="false"> Yes
 						</label>
 						</form>
 					</td>
@@ -61,7 +62,6 @@
 			</table>
 		</form>
 		<p><a href="maincontroller">メインページへ</a></p>
-		<p><a href="mypage">マイページへ</a></p>
 	</main>
 </body>
 </html>
