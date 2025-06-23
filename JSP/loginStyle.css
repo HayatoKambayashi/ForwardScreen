@@ -58,3 +58,22 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #45a049;
 }
+
+/* ボタン（戻るボタン含む） */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #777;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+	margin-top: 10px;  /* 送信ボタンとの間に余白 */
+}
+
+button[type="submit"]:hover {
+    background-color: #666;
+}
+
