@@ -103,6 +103,7 @@ public class LoginController extends HttpServlet {
 					return;
 				} else {
 					HttpSession session = request.getSession();
+					request.setAttribute("manager", inputUser);
 					response.sendRedirect("managerpage");
 					return;
 				}
