@@ -93,7 +93,7 @@ public class LoginController extends HttpServlet {
 						return;
 					}
 					
-				} else
+				}
 				//[認証エラーがある場合]
 				if (!((""+user.getUserId()).equals(inputUser)) || !(user.getPass().equals(inputPass))) {
 					request.setAttribute("infoMessage", "従業員番号またはパスワードに誤りがあります。");
