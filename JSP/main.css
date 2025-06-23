@@ -72,16 +72,6 @@ button {
     background-color: #0056b3;
 }
 
-/* 管理者画面ボタン */
-.admin-button button {
-    background-color: #28a745;
-    color: white;
-}
-
-.admin-button button:hover {
-    background-color: #218838;
-}
-
 /* 投稿入力画面ボタン */
 .post-button button {
     background-color: #ffc107;
@@ -91,6 +81,18 @@ button {
 .post-button button:hover {
     background-color: #e0a800;
 }
+
+/* 投稿入力画面ボタン */
+.maypage-button button {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.mypage-button button:hover {
+    background-color: #e0a800;
+}
+
+
 /* ボタンを並べるためのグループ */
 .button-group {
     display: flex;
@@ -102,3 +104,4 @@ button {
 .button-group form {
     margin: 0;
 }
+

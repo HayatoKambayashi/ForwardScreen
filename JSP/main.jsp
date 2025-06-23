@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,23 +14,32 @@
 <div class="wrapper">
     <div class="container">
         <h2>投稿</h2>
-        <p>UserID: ${data.userId}</p>
-        <p>URL: <a href="${data.url}" target="_blank">${data.url}</a></p>
-        <p>Source: ${data.source}</p>
-        <c:if test="${not empty data.image}">
-            <img src="${data.image}" alt="Image" class="image"/>
-        </c:if>
+        <c:if test="${not empty data.userId}">
+    			<p>UserID: ${data.userId}</p>
+		</c:if>
+
+		<c:if test="${not empty data.url}">
+    		<p>URL: <a href="${data.url}" target="_blank">${data.url}</a></p>
+		</c:if>
+
+		<c:if test="${not empty data.source}">
+    		<p>Source: ${data.source}</p>
+		</c:if>
+
+		<c:if test="${not empty data.image}">
+    		<img src="${data.image}" alt="Image" class="image"/>
+		</c:if>
+
 	<div class="button-group">
-    <form action="maincontroller" method="get" class="button">
+    <form action="top" method="get" class="button">
         <button type="submit">投稿を表示</button>
-    </form>
-    <form action="managerpage" method="get" class="admin-button">
-        <button type="submit">管理者画面へ</button>
     </form>
     <form action="post" method="get" class="post-button">
         <button type="submit">投稿入力画面へ</button>
     </form>
-    <a href="mypage">マイページへ</a>
+    <form action="mypage" method="get" class="mypage-button">
+    <button type="submit">マイページへ</button>
+	</form>
 	</div>
 	</div>
 	</div>
