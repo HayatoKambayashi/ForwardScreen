@@ -15,28 +15,36 @@
     <div class="container">
         <h2>次の内容で投稿してよろしいですか？</h2>
 		<%
-		  UserDto userDto = (UserDto) session.getAttribute("loginUser");
+		UserDto userDto = (UserDto) session.getAttribute("loginUser");
 			if (userDto == null) {
 				userDto = new UserDto();
 				// response.sendRedirect("maincontroller");
 			}
-		  String userId = Integer.toString(userDto.getUserId());
- 		  UserDao userDao = new UserDao();
-		  String userName = (String) userDao.selectById(userId).getUserName();
-		  String genreCd = request.getParameter("genreCd");
-		  PostDao postDao = new PostDao();
-		  ArrayList<GenreDto> allGenre = postDao.getAllGenre();
-		  String genreName = null;
-		  for (GenreDto each : allGenre) {
-			  if (each.getGenreCd().equals(genreCd)) {
-				  genreName = each.getGenreName();
-			  }
-		  }
-		  String source = request.getParameter("source");
-		  String url = request.getParameter("url");
-		  String anonyParam = request.getParameter("anonyFlag");
-		  boolean anony = "true".equalsIgnoreCase(anonyParam);
-		  
+			
+				  String userId = Integer.toString(userDto.getUserId());
+		 		  UserDao userDao = new UserDao();
+				  String userName = (String) userDao.selectById(userId).getUserName();
+				  String genreCd = request.getParameter("genreCd");
+				  PostDao postDao = new PostDao();
+				  
+			ArrayList<GenreDto> allGenre = postDao.getAllGenre();
+			String genreName = null;
+			for (GenreDto each : allGenre) {
+				if (each.getGenreCd().equals(genreCd)) {
+					genreName = each.getGenreName();
+				}
+			}
+			String source = request.getParameter("source");
+			String url = request.getParameter("url");
+			String anonyParam = request.getParameter("anonyFlag");
+			String image = request.getParameter("image");
+			if ((source == null || source.isEmpty()) ||
+					(image == null || image.isEmpty()) ||
+					(url == null || url.isEmpty())) {
+					request.setAttribute("message", "いずれかの項目を入力してください");
+					response.sendRedirect("post");
+				}
+			boolean anony = "true".equalsIgnoreCase(anonyParam);
 		%>
 		<% if (anony) { %>
 		  <p>氏名: unknown</p>
