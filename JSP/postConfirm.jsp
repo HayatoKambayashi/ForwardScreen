@@ -16,6 +16,10 @@
         <h2>次の内容で投稿してよろしいですか？</h2>
 		<%
 		  UserDto userDto = (UserDto) session.getAttribute("loginUser");
+			if (userDto == null) {
+				userDto = new UserDto();
+				// response.sendRedirect("maincontroller");
+			}
 		  String userId = Integer.toString(userDto.getUserId());
  		  UserDao userDao = new UserDao();
 		  String userName = (String) userDao.selectById(userId).getUserName();
@@ -52,9 +56,10 @@
  	   <input type="hidden" name="url" value="<%= url %>">
  	   <input type="hidden" name="anonyFlag" value="<%= anony ? "true" : "" %>">
         <button type="submit" name="btn" value="post">投稿</button>
+        <button type="submit" name="btn" value="change-post">投稿入力画面へ戻る</button>
     </form>
     <form action="post" method="get" class="post-button">
-        <button type="submit">投稿入力画面へ戻る</button>
+        <%-- 61-63行目削除の可能性あり --%>
     </form>
 	</div>
 	</div>
