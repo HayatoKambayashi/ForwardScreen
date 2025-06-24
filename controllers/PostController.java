@@ -1,28 +1,32 @@
 package jp.co.akkodis.syumix;
 
-import jakarta.servlet.RequestDispatcher;
-
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+
 import jp.co.akkodis.syumix.dao.PostDao;
+import jp.co.akkodis.syumix.dto.GenreDto;
 import jp.co.akkodis.syumix.dto.PostDto;
 import jp.co.akkodis.syumix.dto.UserDto;
-import jp.co.akkodis.syumix.dto.GenreDto;
 
 /**
  * Servlet implementation class postController
  */
 @WebServlet("/post")
+@MultipartConfig
 public class PostController extends HttpServlet{
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -31,8 +35,8 @@ public class PostController extends HttpServlet{
 		// セッションチェック
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("loginUser") == null) {
-		response.sendRedirect("login.jsp"); // ログインページへリダイレクト
-		return;
+			response.sendRedirect("login.jsp"); // ログインページへリダイレクト
+			return;
 		}
 		try (PostDao postDao = new PostDao()) {
 			ArrayList<GenreDto> allGenreList = postDao.getAllGenre(); // ジャンル一覧を取得
@@ -49,6 +53,7 @@ public class PostController extends HttpServlet{
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// セッションチェック
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("loginUser") == null) {
@@ -59,10 +64,31 @@ public class PostController extends HttpServlet{
 		String btn = request.getParameter("btn");   // どのボタンを押したかの情報
 		UserDto userDto = (UserDto) request.getSession().getAttribute("loginUser");
 		int userId = userDto.getUserId();         //入力情報たちの取得
+		
+		//imageの定義方法を変更。jspからファイル名を獲得する。データベースにはファイル名を保存する
+		Part part = request.getPart("image");
+		String image = part.getSubmittedFileName();
+		//きちんと回収できているか確認
+		System.out.println(image);
+		//サーバー上(コード実行してるPC上)に作成した
+		//C:\pleiades\2024-12\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps
+		//\Syumix\ uploadフォルダに保存する
+		String path = getServletContext().getRealPath("/upload");
+
+		// フォルダが存在しない場合は作成
+		File uploadDir = new File(path);
+		if (!uploadDir.exists()) {
+			uploadDir.mkdirs(); 
+		}
+
+		part.write(path + File.separator + image);
 		String genreCd = request.getParameter("genreCd");
 		String source = request.getParameter("source");
-		String image = request.getParameter("image");
 		String url = request.getParameter("url");
+		
+		
+		
+		
 		
 		// 今日の日付を取得
 		LocalDate today = LocalDate.now();
