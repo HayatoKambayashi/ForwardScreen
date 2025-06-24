@@ -75,9 +75,12 @@ public class LoginController extends HttpServlet {
 				// ここから
 				UserDto userDto = (UserDto) session.getAttribute("loginUser");
 				int userId = userDto.getUserId();
+				System.out.println(userId);
 				if (userId == UserDto.MANAGER_ID) {
+					System.out.println("if文OK");
 					userDao.updatePassword(inputPass, Integer.toString(userId));
 					request.getSession().setAttribute("userId", UserDto.MANAGER_ID); // userId情報をセッションに保存
+					session.setAttribute("manager", inputUser);
 				    response.sendRedirect("managerpage"); // ← これで doGet() に行く
 					return;
 				} else {
@@ -107,7 +110,7 @@ public class LoginController extends HttpServlet {
 			if (user.getUserId() == UserDto.MANAGER_ID && user.getPass().equals(inputPass)) { 
 				if (user.getPassFlag()) { // 仮パス設定フラグがtrueの場合
 					HttpSession session = request.getSession();
-					session.setAttribute("loginUser", inputUser);
+					session.setAttribute("loginUser", user);
 					request.setAttribute("userId", inputUser);
 					request.setAttribute("userName", user.getUserName());
 					request.getRequestDispatcher("/passChange.jsp").forward(request, response);
