@@ -23,7 +23,6 @@ public class LoginController extends HttpServlet {
 	private String passChangeFlag = null; // passchangeページから呼び出されたか確認する変数
 	private String inputCheckPass = null; // passchangeページでの新パスワード確認用String
 	private String userName = null; // passchangeページで表示するユーザー名
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -42,7 +41,6 @@ public class LoginController extends HttpServlet {
 		
 		try (UserDao userDao = new UserDao()){
 			if ( !(passChangeFlag.equals("0")) ) { // [3７行目付近if文と関連]
-
 				// [不要かも]セッションチェック：ログイン状況が取得できない場合、login.jspに飛ばす
 				HttpSession session = request.getSession(false);
 				if (session == null || session.getAttribute("loginUser") == null) {
@@ -74,11 +72,22 @@ public class LoginController extends HttpServlet {
 				request.getRequestDispatcher("/passChange.jsp").forward(request, response);
 				return;
 				}
-				
+				// ここから
+				String userId = (String) session.getAttribute("loginUser");
+				int userIdInt = Integer.parseInt(userId);
+				if (userIdInt == UserDto.MANAGER_ID) {
+					userDao.updatePassword(inputPass, userId);
+					request.getSession().setAttribute("userId", UserDto.MANAGER_ID); // userId情報をセッションに保存
+				    response.sendRedirect("managerpage"); // ← これで doGet() に行く
+					return;
+				} else {
+				// ここまで
 				userDao.updatePassword(inputPass, inputUser);
 				request.getRequestDispatcher("/main.jsp").forward(request, response);
 				// mainに遷移する。
 				return;
+				}
+				
 			}
 
 			//[IDまたはパスワードが未入力の場合]
@@ -97,9 +106,10 @@ public class LoginController extends HttpServlet {
 			// 管理者がログインした場合
 			if (user.getUserId() == UserDto.MANAGER_ID && user.getPass().equals(inputPass)) { 
 				if (user.getPassFlag()) { // 仮パス設定フラグがtrueの場合
-					request.setAttribute("username", inputUser);
 					HttpSession session = request.getSession();
-					session.setAttribute("manager", inputUser);
+					session.setAttribute("loginUser", inputUser);
+					request.setAttribute("userId", inputUser);
+					request.setAttribute("userName", user.getUserName());
 					request.getRequestDispatcher("/passChange.jsp").forward(request, response);
 					return;
 				} else {
