@@ -16,6 +16,16 @@
 		return;
 	}
 %>
+	<script>
+	function confirmPost() {
+	    const confirmed = confirm("本当に投稿してもよろしいですか？");
+	    if (confirmed) {
+	        document.querySelector('form').submit();
+	    }
+	}
+	</script>
+
+
 <body>
 	<header>
 		<h1>投稿フォーム入力ページ</h1>
@@ -59,7 +69,7 @@
 				</tr>
 				<tr>
 					<td>url</td>
-					<td><input type="text" name="url" value=<%= url %>/>
+					<td><input type="text" name="url" value="<%= url %>"/>
 					</td>
 				</tr>
 				<tr>
@@ -71,11 +81,12 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center">
-						<input type="hidden" name="btn" value="post">
-						<button type="submit" class="button">投稿</button>
-					</td>
+    				<td colspan="2" align="center">
+        				<input type="hidden" name="btn" value="post">
+       				 <button type="button" class="button" onclick="confirmPost()">投稿</button>
+   						 </td>
 				</tr>
+				
 			</table>
 		</form>
 		<p><a href="maincontroller">メインページへ</a></p>
