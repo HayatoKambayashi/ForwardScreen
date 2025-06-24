@@ -99,13 +99,14 @@ public class PostController extends HttpServlet{
 			ArrayList<GenreDto> allGenreList = post.getAllGenre();
 		    request.setAttribute("allGenreList", allGenreList); // ← JSTLに必要！
 
-		    // TODO: 【手塚さん引継ぎ用】
+		     // TODO: 【手塚さん引継ぎ用】
 		    if (btn != null && btn.equals("change-post")) {
 		    	// 投稿内容最終確認で、投稿を修正するボタンが押された場合  のIFブロック
 		    	
 		    	 request.setAttribute("genreCd", genreCd);
 		    	 request.setAttribute("source", source); // 入力内容の保持（Post.jsp遷移後も）
 		    	 request.setAttribute("url", url);
+		    	 //TODO: このへん(ifブロックラスト)でpost.jspにリダイレクトする。
 		    }
 
 			if(btn != null && btn.equals("post")) { // 投稿ボタンがクリックされた場合
