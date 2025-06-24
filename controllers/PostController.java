@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ import jp.co.akkodis.syumix.dto.UserDto;
  * Servlet implementation class postController
  */
 @WebServlet("/post")
+@MultipartConfig
 public class PostController extends HttpServlet{
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -62,27 +64,33 @@ public class PostController extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		UserDto userDto = (UserDto) request.getSession().getAttribute("loginUser");
 		String btn = request.getParameter("btn");   // どのボタンを押したかの情報
+		System.out.println(btn);
 		 
 		//◆以下、入力情報の取得
 		int userId = userDto.getUserId();
 		
 		//imageの定義方法を変更。jspからファイル名を獲得する。データベースにはファイル名を保存する
 		Part part = request.getPart("image");
-		String image = part.getSubmittedFileName();
-		//きちんと回収できているか確認
-		System.out.println(image);
-		//サーバー上(コード実行してるPC上)に作成した
-		//C:\pleiades\2024-12\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps
-		//\Syumix\ uploadフォルダに保存する
-		String path = getServletContext().getRealPath("/upload");
-
-		// フォルダが存在しない場合は作成
-		File uploadDir = new File(path);
-		if (!uploadDir.exists()) {
-			uploadDir.mkdirs(); 
+		String image;
+		if (part != null && part.getSize() > 0) {
+			image = part.getSubmittedFileName();
+			//きちんと回収できているか確認
+			System.out.println(image);
+			//サーバー上(コード実行してるPC上)に作成した
+			//C:\pleiades\2024-12\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps
+			//\Syumix\ uploadフォルダに保存する
+			String path = getServletContext().getRealPath("/upload");
+	
+			// フォルダが存在しない場合は作成
+			File uploadDir = new File(path);
+			if (!uploadDir.exists()) {
+				uploadDir.mkdirs(); 
+			}
+	
+			part.write(path + File.separator + image);
+		} else {
+			image = null; 
 		}
-
-		part.write(path + File.separator + image);
 		
 		String genreCd = request.getParameter("genreCd");
 		String source = request.getParameter("source");
@@ -96,6 +104,7 @@ public class PostController extends HttpServlet{
 		String jsp = "/mypage";	 // sprint1では投稿フォーム確認画面にいかずマイページ画面に遷移させる。
 		
 		try (PostDao post = new PostDao()) {
+			System.out.println("aiu" + btn);
 			ArrayList<GenreDto> allGenreList = post.getAllGenre();
 		    request.setAttribute("allGenreList", allGenreList); // ← JSTLに必要！
 
@@ -111,7 +120,7 @@ public class PostController extends HttpServlet{
 
 			if(btn != null && btn.equals("post")) { // 投稿ボタンがクリックされた場合
 				// 投稿をDBに保存する準備を行う。
-				
+				System.out.println("eo");
 				PostDto postDto = new PostDto();
 
 				if (genreCd != null && !genreCd.isEmpty()
