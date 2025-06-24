@@ -30,8 +30,8 @@
     		<p>Source: ${data.source}</p>
 		</c:if>
 
-		<c:if test="${not empty data.image}">
-    		<img src="${data.image}" alt="Image" class="image"/>
+		<c:if test="${not empty data.image}"> <!-- img srcにupload/を追加 -->
+    		<img src="upload/${data.image}" alt="Image" class="image"/>
 		</c:if>
 
 	<div class="button-group">
