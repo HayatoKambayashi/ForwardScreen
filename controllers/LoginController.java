@@ -73,10 +73,10 @@ public class LoginController extends HttpServlet {
 				return;
 				}
 				// ここから
-				String userId = (String) session.getAttribute("loginUser");
-				int userIdInt = Integer.parseInt(userId);
-				if (userIdInt == UserDto.MANAGER_ID) {
-					userDao.updatePassword(inputPass, userId);
+				UserDto userDto = (UserDto) session.getAttribute("loginUser");
+				int userId = userDto.getUserId();
+				if (userId == UserDto.MANAGER_ID) {
+					userDao.updatePassword(inputPass, Integer.toString(userId));
 					request.getSession().setAttribute("userId", UserDto.MANAGER_ID); // userId情報をセッションに保存
 				    response.sendRedirect("managerpage"); // ← これで doGet() に行く
 					return;
