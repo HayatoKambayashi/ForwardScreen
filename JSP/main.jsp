@@ -12,7 +12,8 @@
 </head>
 <body>
 <div class="wrapper">
-    <div class="container">
+<div class="container">
+<div class="button-group">
         <h2>投稿</h2>
 		<c:if test="${data.anonyFlag}">
     		<p>氏名: unknown</p>
@@ -34,7 +35,7 @@
     		<img src="upload/${data.image}" alt="Image" class="image"/>
 		</c:if>
 
-	<div class="button-group">
+	
     <form action="maincontroller" method="get" class="button">
         <button type="submit">投稿を表示</button>
     </form>
@@ -44,7 +45,7 @@
     <form action="mypage" method="get" class="mypage-button">
     <button type="submit">マイページへ</button>
 	</form>
-	<form action="${pageContext.request.contextPath}/logout" method="get">
+	<form action="${pageContext.request.contextPath}/logout" method="get" class="logout-button">
     <button type="submit">ログアウト</button>
 	</form>
 	</div>
