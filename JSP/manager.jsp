@@ -40,12 +40,13 @@
             <!-- retiredFlagがfalse(在籍中)の場合のみ「退職」ボタンを表示 -->
             <c:if test="${not user.retiredFlag}">
             <td>
-                <form action="managerpage" method="post">
-                    <input type="hidden" name="userId" value="${user.userId}" />
-                    <c:if test="${user.userId != UserDto.MANAGER_ID}">
-                    <input type="submit" name="btn" value="退職" />
-                    </c:if>
-                </form>
+              <form action="managerpage" method="post" onsubmit="return confirm('本当に退職処理を行いますか？');">
+    			<input type="hidden" name="userId" value="${user.userId}" />
+   				 <c:if test="${user.userId != UserDto.MANAGER_ID}">
+        			<input type="submit" name="btn" value="退職" />
+   				 </c:if>
+				</form>
+              
             </td>
         </c:if>
 
