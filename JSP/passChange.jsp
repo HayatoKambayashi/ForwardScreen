@@ -8,14 +8,14 @@
 <link rel="stylesheet" href="loginStyle.css">
 </head>
 
-<%
-	//セッションチェック：ログイン状況が取得できない場合、login.jspに飛ばす
-	session = request.getSession(false);
-	if (session == null || session.getAttribute("loginUser") == null || session.getAttribute("manager") == null) {
-		response.sendRedirect("login.jsp");
-		return;
-	}
-%>
+<!--<%-->
+<!--	//セッションチェック：ログイン状況が取得できない場合、login.jspに飛ばす-->
+<!--	session = request.getSession(false);-->
+<!--	if (session == null || session.getAttribute("loginUser") == null || session.getAttribute("manager") == null) {-->
+<!--		response.sendRedirect("login.jsp");-->
+<!--		return;-->
+<!--	}-->
+<!--%>-->
 
 <body>
     <div class="login-container">
