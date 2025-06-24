@@ -7,10 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>manager form</title>
-<link rel="stylesheet" href="manager.css">
 </head>
 <body>
-<div class="wrapper">
 <h2>ユーザ一覧</h2>
 
    <!-- ユーザの一覧表示 -->
@@ -44,7 +42,9 @@
             <td>
                 <form action="managerpage" method="post">
                     <input type="hidden" name="userId" value="${user.userId}" />
+                    <c:if test="${user.userId != UserDto.MANAGER_ID}">
                     <input type="submit" name="btn" value="退職" />
+                    </c:if>
                 </form>
             </td>
         </c:if>
@@ -54,13 +54,9 @@
 
 </table>
 	</form>
-	
-	<td>
 	<form action="${pageContext.request.contextPath}/logout" method="get">
     <button type="submit">ログアウト</button>
-    </td>
 	</form>
-</div>
 
 <!--		<form action="main.jsp" method="get">-->
 <!--    		<input type="submit" value="戻る">-->
