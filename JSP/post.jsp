@@ -30,13 +30,25 @@
 					<td>
 					<select name="genreCd" id="genre">
 					  <c:forEach var="genre" items="${allGenreList}">
+					<%-- if () --%>
 					    <option value="${genre.genreCd}">${genre.genreName}</option>
 					  </c:forEach>
 					</select></td>
 				</tr>
+				<%
+					// 投稿最終確認からのリダイレクト→入力内容保持　はここで準備しています。
+					String source = (String) request.getAttribute("source");
+					String url = (String) request.getAttribute("url");
+					if (source == null) {
+						source = "";
+					}
+					if (url == null) {
+						url = "";
+					}
+				%>
 				<tr>
 					<td>コメント</td>
-					<td><textarea name="source"></textarea></td>
+					<td><textarea name="source"><%=source%></textarea></td>
 				</tr>
 				<tr>
 					<td>画像</td>
@@ -47,7 +59,7 @@
 				</tr>
 				<tr>
 					<td>url</td>
-					<td><input type="text" name="url" />
+					<td><input type="text" name="url" value=<%= url %>/>
 					</td>
 				</tr>
 				<tr>
