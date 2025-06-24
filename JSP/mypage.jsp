@@ -91,7 +91,18 @@ if (list.size() > 0) {
         <td><%= genreName %></td>
         <td><%=post.getSource() %></td>
         <td><a href="<%=post.getUrl() %>"><%=post.getUrl() %></a></td>
-        <td><img src="<%=post.getImage() %>" alt="投稿画像" /></td>
+        <td> <!-- 画像系表示のための追加要素 -->     	
+		 <% String image = post.getImage(); %>
+		<% if (image != null && (image.endsWith(".png") || image.endsWith(".jpg") || image.endsWith(".jpeg"))) { %>
+		  <img src="upload/<%= image %>" alt="画像" class="img">
+		<% } else if (image != null && image.endsWith(".gif")) { %>
+		  <img src="upload/<%= image %>" alt="GIF画像" class="img">
+		<% } else if (image != null && (image.endsWith(".mp4") || image.endsWith(".webm"))) { %>
+		  <video style="max-height: 60px; border-radius: 4px;" controls class="img">
+		    <source src="upload/<%= image %>" type="video/mp4">
+		  </video>
+		<% } %>
+		<!-- 画像系表示のための追加要素 --></td>
 		<td>
 		  <!-- 削除ボタン（確認表示用） -->
 		  <form class="remove-button">
