@@ -27,6 +27,7 @@ public class ManagerController extends HttpServlet {
 		
 		// セッションチェック
 		HttpSession session = request.getSession(false);
+		// 前提：セッション何もない　もしくはmanagerアトリビュートを取得していない
 		if (session.getAttribute("manager") == null) {
 			if (session.getAttribute("loginUser") == null) {
 				// ログインユーザ情報がない場合。
