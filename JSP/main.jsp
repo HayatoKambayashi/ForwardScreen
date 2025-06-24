@@ -14,8 +14,7 @@
 <body>
 <div class="wrapper">
 <div class="container">
-<div class="button-group">
-        <h2>投稿</h2>
+        <h1>投稿</h2>
 		<c:if test="${data.anonyFlag}">
     		<p>氏名: unknown</p>
 		</c:if>
@@ -23,6 +22,11 @@
     		<p>氏名: ${name}</p>
 		</c:if>
     	<p>ジャンル: ${genreName}</p>
+    	
+    	
+		<c:if test="${not empty data.source}">
+    		<p>コメント: ${data.source}</p>
+		</c:if>
 
 <!-- Youtubeだけ埋め込みになるように調整 -->
 		<c:if test="${not empty data.url}">
@@ -42,9 +46,6 @@
 		</c:if>
 
 
-		<c:if test="${not empty data.source}">
-    		<p>Source: ${data.source}</p>
-		</c:if>
 <!--画像、動画を表示できるように  -->
 		<c:choose>
 		
@@ -64,7 +65,7 @@
     	</c:otherwise>
 		</c:choose>
 
-	
+	<div class="button-group">
     <form action="maincontroller" method="get" class="button">
         <button type="submit">投稿を表示</button>
     </form>
