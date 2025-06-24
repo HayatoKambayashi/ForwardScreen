@@ -8,22 +8,13 @@
 <title>投稿フォーム入力ページ</title>
 <link rel="stylesheet" href="postStyle.css">
 </head>
-<%
-	//セッションチェック：ログイン状況が取得できない場合、login.jspに飛ばす
-	session = request.getSession(false);
-	if (session == null || session.getAttribute("loginUser") == null) {
-		response.sendRedirect("login.jsp");
-		return;
-	}
-%>
 <body>
 	<header>
 		<h1>投稿フォーム入力ページ</h1>
 	</header>
 	<main>
  		<p class="message"><c:out value="${message}"/></p>
- 		<p><a href="mypage">マイページへ</a></p>
-		<form action="post" method="post">
+		<form action="postConfirm.jsp" method="post">
 			<table border="1">
 				<tr>
 					<td>ジャンル</td>
@@ -54,22 +45,21 @@
 				<tr>
 					<td>匿名で投稿しますか？</td>
 					<td>
-						<form action="insert" method="post">
 						<label>
-						<input type="checkbox" name="anonyFlag" value="false"> Yes
+						<input type="checkbox" name="anonyFlag" value="true"> Yes
 						</label>
-						</form>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<input type="hidden" name="btn" value="post">
+						<input type="hidden" name="btn" value="postConfirm">
 						<button type="submit" class="button">投稿</button>
 					</td>
 				</tr>
 			</table>
 		</form>
 		<p><a href="maincontroller">メインページへ</a></p>
+		<p><a href="mypage">マイページへ</a></p>
 	</main>
 </body>
 </html>
