@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
 <!DOCTYPE html>
 <html>
@@ -23,17 +24,45 @@
 		</c:if>
     	<p>ジャンル: ${genreName}</p>
 
+<!-- Youtubeだけ埋め込みになるように調整 -->
 		<c:if test="${not empty data.url}">
-    		<p>URL: <a href="${data.url}" target="_blank">${data.url}</a></p>
+    	<c:choose>
+        <c:when test="${fn:contains(data.url, 'youtube.com/watch?v=')}">
+            <c:set var="videoId" value="${fn:substringAfter(data.url, 'v=')}" />
+            <iframe width="560" height="315"
+                    src="https://www.youtube.com/embed/${videoId}"
+                    frameborder="0"
+                    allowfullscreen>
+            </iframe>
+        </c:when>
+        <c:otherwise>
+            <p>URL: <a href="${data.url}" target="_blank">${data.url}</a></p>
+        </c:otherwise>
+    	</c:choose>
 		</c:if>
+
 
 		<c:if test="${not empty data.source}">
     		<p>Source: ${data.source}</p>
 		</c:if>
-
-		<c:if test="${not empty data.image}"> <!-- img srcにupload/を追加 -->
-    		<img src="upload/${data.image}" alt="Image" class="image"/>
-		</c:if>
+<!--画像、動画を表示できるように  -->
+		<c:choose>
+		
+    	<c:when test="${not empty data.image and (fn:endsWith(data.image, '.png') or fn:endsWith(data.image, '.jpg') or fn:endsWith(data.image, '.jpeg'))}">
+        <img src="upload/${data.image}" alt="画像" class="image">
+    	</c:when>
+    	<c:when test="${not empty data.image and fn:endsWith(data.image, '.gif')}">
+        <img src="upload/${data.image}" alt="GIF画像" class="image">
+    	</c:when>
+    	<c:when test="${not empty data.image and (fn:endsWith(data.image, '.mp4') or fn:endsWith(data.image, '.webm'))}">
+        <video width="480" height="270" controls>
+            <source src="upload/${data.image}" type="video/mp4" >
+        </video>
+    	</c:when>
+    	<c:otherwise>
+        
+    	</c:otherwise>
+		</c:choose>
 
 	
     <form action="maincontroller" method="get" class="button">
