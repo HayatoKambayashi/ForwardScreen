@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,7 +25,6 @@ import jp.co.akkodis.syumix.dto.UserDto;
  * Servlet implementation class postController
  */
 @WebServlet("/post")
-@MultipartConfig
 public class PostController extends HttpServlet{
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -35,8 +33,8 @@ public class PostController extends HttpServlet{
 		// セッションチェック
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("loginUser") == null) {
-			response.sendRedirect("login.jsp"); // ログインページへリダイレクト
-			return;
+		response.sendRedirect("login.jsp"); // ログインページへリダイレクト
+		return;
 		}
 		try (PostDao postDao = new PostDao()) {
 			ArrayList<GenreDto> allGenreList = postDao.getAllGenre(); // ジャンル一覧を取得
@@ -60,10 +58,13 @@ public class PostController extends HttpServlet{
 		response.sendRedirect("login.jsp"); // ログインページへリダイレクト
 		return;
 		}
+		
 		request.setCharacterEncoding("UTF-8");
-		String btn = request.getParameter("btn");   // どのボタンを押したかの情報
 		UserDto userDto = (UserDto) request.getSession().getAttribute("loginUser");
-		int userId = userDto.getUserId();         //入力情報たちの取得
+		String btn = request.getParameter("btn");   // どのボタンを押したかの情報
+		 
+		//◆以下、入力情報の取得
+		int userId = userDto.getUserId();
 		
 		//imageの定義方法を変更。jspからファイル名を獲得する。データベースにはファイル名を保存する
 		Part part = request.getPart("image");
@@ -82,34 +83,40 @@ public class PostController extends HttpServlet{
 		}
 
 		part.write(path + File.separator + image);
+		
 		String genreCd = request.getParameter("genreCd");
 		String source = request.getParameter("source");
-		String url = request.getParameter("url");
-		
-		
-		
-		
+		String url = request.getParameter("url");  //◆入力情報の取得ここまで
 		
 		// 今日の日付を取得
 		LocalDate today = LocalDate.now();
 		// SQLのDate型に変換
 		Date sqlDate = Date.valueOf(today);
 
-		// sprint1では投稿フォーム確認画面にいかずマイページ画面に遷移させる。
-		String jsp = "/mypage";	
+		String jsp = "/mypage";	 // sprint1では投稿フォーム確認画面にいかずマイページ画面に遷移させる。
 		
 		try (PostDao post = new PostDao()) {
 			ArrayList<GenreDto> allGenreList = post.getAllGenre();
 		    request.setAttribute("allGenreList", allGenreList); // ← JSTLに必要！
 
+		    // TODO: 【手塚さん引継ぎ用】
+		    if (btn != null && btn.equals("change-post")) {
+		    	// 投稿内容最終確認で、投稿を修正するボタンが押された場合  のIFブロック
+		    	
+		    	 request.setAttribute("genreCd", genreCd);
+		    	 request.setAttribute("source", source); // 入力内容の保持（Post.jsp遷移後も）
+		    	 request.setAttribute("url", url);
+		    }
 
-			if(btn != null && btn.equals("post")) {
+			if(btn != null && btn.equals("post")) { // 投稿ボタンがクリックされた場合
+				// 投稿をDBに保存する準備を行う。
+				
 				PostDto postDto = new PostDto();
 
 				if (genreCd != null && !genreCd.isEmpty()
 					&& ((source != null && !source.isEmpty())|| 
 						(image != null && !image.isEmpty()) ||
-						(url != null && !url.isEmpty()))){
+						(url != null && !url.isEmpty()))){ // 入力必須項目 ３つのうち１つが入力済み、かつ投稿タグ指定済み
 					
 					postDto.setUserId(userId);
 					postDto.setGenreCd(genreCd);
@@ -129,7 +136,7 @@ public class PostController extends HttpServlet{
 						request.setAttribute("message", "投稿が完了しました");
 					}else {
 						request.setAttribute("message", "投稿に失敗しました。");
-					}
+					} // 
 				}else {
 					request.setAttribute("message", "いずれかの項目を入力してください");
 				}
