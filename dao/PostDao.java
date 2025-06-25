@@ -38,6 +38,23 @@ public class PostDao extends Dao{
 		return result;
 		
 	}
+	//getFilePathメソッドを追加。deleteメソッド直前で使ってファイルを消去する。
+	public String getFilePath(int postId) {
+	    String sql = "SELECT image FROM post WHERE postId = ?" ; 
+	    String image = null;
+
+	    try (PreparedStatement ps = connection.prepareStatement(sql)) {
+	        ps.setInt(1, postId);
+	        ResultSet rs = ps.executeQuery();
+	        if (rs.next()) {
+	        	image = rs.getString("image");
+	         }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return image;
+	}
 	
 	/**
 	 * 投稿をデータベースに挿入するメソッドです。
