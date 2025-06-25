@@ -180,6 +180,40 @@ public class PostDao extends Dao{
 		
 		return postlist;
 	}
+
+	/**
+	 * 投稿を一件取り出し、投稿ぺーじを表示します。
+	 * @param postId
+	 * @return PostDto
+	 */
+	public PostDto selectOnePost(String postId) {
+		String sql = "SELECT * FROM post WHERE postId = ? ;";
+		
+		PostDto post = new PostDto(); // return
+		
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, postId);
+			// todo
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				post.setPostId(rs.getInt(1));
+				post.setUserId(rs.getInt(2));
+				post.setSource(rs.getString(3));
+				post.setUrl(rs.getString(4));
+				post.setGenreCd(rs.getString(5));
+				post.setImage(rs.getString(6));
+				post.setAnonyFlag(rs.getBoolean(7));
+				post.setDate(rs.getDate(8));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return post;
+	}
 	
 	
 public PostDto pick () { // 担当： 上林
