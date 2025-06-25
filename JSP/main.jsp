@@ -14,7 +14,7 @@
 <body>
 <div class="wrapper">
 <div class="container">
-        <h1>投稿</h2>
+        <h1>投稿</h1>
 		<c:if test="${data.anonyFlag}">
     		<p>氏名: unknown</p>
 		</c:if>
