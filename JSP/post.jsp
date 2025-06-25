@@ -27,6 +27,9 @@
 
 
 <body>
+<div class="message">
+
+
 	<header>
 		<h1>投稿フォーム入力ページ</h1>
 	</header>
@@ -38,7 +41,7 @@
 				<tr>
 					<td>ジャンル</td>
 					<td>
-					<select name="genreCd" id="genre">
+					<select name="genreCd" >
 					  <c:forEach var="genre" items="${allGenreList}">
 					<%-- if () --%>
 					    <option value="${genre.genreCd}">${genre.genreName}</option>
@@ -76,11 +79,12 @@
 					<td>匿名で投稿しますか？</td>
 					<td>
 						<label>
-						<input type="checkbox" name="anonyFlag" value="true"> Yes
+						<input type="checkbox" name="anonyFlag" value="false"> Yes
 						</label>
 					</td>
 				</tr>
 				<tr>
+				<div class="button">
     				<td colspan="2" align="center">
         				<input type="hidden" name="btn" value="post">
        				 <button type="button" class="button" onclick="confirmPost()">投稿</button>
