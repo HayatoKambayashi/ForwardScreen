@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>manager form</title>
+<link rel="stylesheet" href="manager.css">
 </head>
 <body>
 <h2>ユーザ一覧</h2>
