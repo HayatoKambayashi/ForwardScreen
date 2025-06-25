@@ -1,10 +1,12 @@
 package jp.co.akkodis.syumix;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import jp.co.akkodis.syumix.dto.UserDto;
  * Servlet implementation class MyPageController
  */
 @WebServlet("/mypage")
+@MultipartConfig
 public class MyPageController extends HttpServlet {
 	
 //投稿内容を取得
@@ -67,13 +70,23 @@ public class MyPageController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws
 	ServletException, IOException {
-		String action = request.getParameter("action");
+		String action = request.getParameter("action");	
 		boolean flug = true;
 		
 		if ("はい、削除します".equals(action)) { //削除ボタンを押した場合
 			int postID = Integer.parseInt(request.getParameter("postId"));
 			
 			try (PostDao postDao = new PostDao()) {
+				
+				//requestでimageを持ってくることが出来なかったのでpostDaoにメソッド追加して獲得
+				String img =postDao.getFilePath(postID);
+				
+				if (img !=null && !img.isEmpty()) {
+					String path = getServletContext().getRealPath("/upload");
+					File file = new File(path + File.separator + img);
+					file.delete();
+				}
+				
 				postDao.delete(postID);
 		        request.setAttribute("deleteflug", flug);
 
