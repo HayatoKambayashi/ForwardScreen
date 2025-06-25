@@ -24,9 +24,9 @@
 			
 			PostDto post = dao.selectOnePost(postId);
 			UserDto loginUser = (UserDto) session.getAttribute("loginUser");
-			//if (post.getUserId() != loginUser.getUserId()) {
-			//	response.sendRedirect("login.jsp"); // リダイレクト先：ログインまたはメインページ
-			//}
+			if (post.getUserId() != loginUser.getUserId()) {
+				response.sendRedirect("maincontroller"); // リダイレクト先：ログインまたはメインページ
+			}
 			
 			String genreCd = post.getGenreCd();
 			ArrayList<GenreDto> allGenre = dao.getAllGenre();
