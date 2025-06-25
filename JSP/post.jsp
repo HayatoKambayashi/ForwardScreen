@@ -37,7 +37,7 @@
  		<p class="message"><c:out value="${message}" escapeXml="false"/></p>
  		<p><a href="mypage">マイページへ</a></p>
 		<form action="post" method="post" enctype="multipart/form-data">   <!-- フォームの入れ子構造を改善 -->
-			<table border="1">
+		<table border="1">
 				<tr>
 					<td>ジャンル</td>
 					<td>
@@ -84,13 +84,13 @@
 					</td>
 				</tr>
 				<tr>
-				<div class="button">
-    				<td colspan="2" align="center">
-        				<input type="hidden" name="btn" value="post">
-       				 <button type="button" class="button" onclick="confirmPost()">投稿</button>
-   						 </td>
+				  <td colspan="2" align="center">
+
+				      <input type="hidden" name="btn" value="post">
+				      <button type="button" class="button" onclick="confirmPost()">投稿</button>
+
+				  </td>
 				</tr>
-				
 			</table>
 		</form>
 		<p><a href="maincontroller">メインページへ</a></p>
