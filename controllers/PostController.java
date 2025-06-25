@@ -108,7 +108,6 @@ public class PostController extends HttpServlet{
 			ArrayList<GenreDto> allGenreList = post.getAllGenre();
 		    request.setAttribute("allGenreList", allGenreList); // ← JSTLに必要！
 
-		     // TODO: 【手塚さん引継ぎ用】
 		    if (btn != null && btn.equals("change-post")) {
 		    	// 投稿内容最終確認で、投稿を修正するボタンが押された場合  のIFブロック
 		    	
@@ -143,7 +142,9 @@ public class PostController extends HttpServlet{
 					int insertCount = post.insert(postDto);
 					
 					if(insertCount > 0) {
-						request.setAttribute("message", "投稿が完了しました");
+						PostDto currentPost = post.selectByUser(""+userId).get(0);
+						request.setAttribute("message", "投稿が完了しました。<a href=\"mypageDetail.jsp?pid="
+								+ currentPost.getPostId() + "\">画像や動画のプレビューはこちら</a>");
 					}else {
 						request.setAttribute("message", "投稿に失敗しました。");
 					} // 
