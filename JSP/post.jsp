@@ -79,7 +79,7 @@
 					<td>匿名で投稿しますか？</td>
 					<td>
 						<label>
-						<input type="checkbox" name="anonyFlag" value="false"> Yes
+						<input type="checkbox" name="anonyFlag" value="true"> Yes
 						</label>
 					</td>
 				</tr>
