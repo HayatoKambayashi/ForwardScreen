@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, jp.co.akkodis.syumix.dto.UserDto" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,8 @@
         <input type="hidden" name="id" value="1"> 
         
         <%-- userNameを表示 --%>
-        <% String userName = (String) request.getAttribute("userName");%>
+        <% 	UserDto user = (UserDto) session.getAttribute("loginUser");
+        	String userName = user.getUserName();%>
         <p class="userName"><%= "ユーザー名 : "+userName %></p>
         
         <%-- エラーメッセージがあれば表示 --%>
