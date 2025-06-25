@@ -58,9 +58,11 @@
                 frameborder="0"
                 allowfullscreen>
         </iframe>
-<% } %>
+<% } // if (url contains youtubeのURL特徴)
+    else {%>
 		<p>URL：<a href="<%= post.getUrl() %>" target="_blank"><%= post.getUrl() %></a></p>
-		<% } %>
+<%			 }// elseブロック
+    } // 外側の(URLがnullか否かを確認する)IFブロック %>
 		
 		<% String image = post.getImage();
 		if (image != null && (image.endsWith(".png") || image.endsWith(".jpg") || image.endsWith(".jpeg")))
