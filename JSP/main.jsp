@@ -28,7 +28,8 @@
     		<p>コメント: ${data.source}</p>
 		</c:if>
 
-<!-- Youtubeだけ埋め込みになるように調整 -->
+<!-- Youtubeだけ埋め込みになるように調整
+短縮urlやショートにも対応！ -->
 		<c:if test="${not empty data.url}">
     	<c:choose>
         <c:when test="${fn:contains(data.url, 'youtube.com/watch?v=')}">
@@ -39,6 +40,24 @@
                     allowfullscreen>
             </iframe>
         </c:when>
+        <c:when test="${fn:contains(data.url, 'youtu.be/')}">
+        <c:set var="videoId" value="${fn:substringAfter(data.url, 'youtu.be/')}" />
+        <iframe width="560" height="315"
+                src="https://www.youtube.com/embed/${videoId}"
+                frameborder="0" allowfullscreen>
+        </iframe>
+    	</c:when>
+    	<c:when test="${fn:contains(data.url, 'youtube.com/shorts/')}">
+        <c:set var="videoId" value="${fn:substringAfter(data.url, 'shorts/')}" />
+        <c:if test="${fn:contains(videoId, '?')}">
+            <c:set var="videoId" value="${fn:substringBefore(videoId, '?')}" />
+        </c:if>
+        <iframe width="560" height="315"
+                src="https://www.youtube.com/embed/${videoId}"
+                frameborder="0" allowfullscreen>
+        </iframe>
+    	</c:when>
+    	
         <c:otherwise>
             <p>URL: <a href="${data.url}" target="_blank">${data.url}</a></p>
         </c:otherwise>

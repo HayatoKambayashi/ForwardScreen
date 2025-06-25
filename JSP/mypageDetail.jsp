@@ -46,23 +46,53 @@
 		<% if ( !(post.getSource().isBlank() || post.getSource().isEmpty()) )
 			{ %>
 		<p>コメント：<%= post.getSource() %></p>
-		<% }
-		if ( !(post.getUrl().isBlank() || post.getUrl().isEmpty()) )
-			{ 
-    String url = post.getUrl();
-    if (url != null && url.contains("youtube.com/watch?v=")) {
-        String videoId = url.substring(url.indexOf("v=") + 2);
-%>
-        <iframe width="560" height="315"
-                src="https://www.youtube.com/embed/<%= videoId %>"
-                frameborder="0"
-                allowfullscreen>
-        </iframe>
-<% } // if (url contains youtubeのURL特徴)
-    else {%>
-		<p>URL：<a href="<%= post.getUrl() %>" target="_blank"><%= post.getUrl() %></a></p>
-<%			 }// elseブロック
-    } // 外側の(URLがnullか否かを確認する)IFブロック %>
+		<% } %>
+		<%
+	    String url = post.getUrl();
+	    if (url != null && !url.trim().isEmpty()) {
+	        String videoId = null;
+	        String embedUrl = null;
+
+	        if (url.contains("youtube.com/watch?v=")) {
+	            videoId = url.substring(url.indexOf("v=") + 2);
+	            int ampIndex = videoId.indexOf("&");
+	            if (ampIndex != -1) {
+	                videoId = videoId.substring(0, ampIndex);
+	            }
+	            embedUrl = "https://www.youtube.com/embed/" + videoId;
+
+	        } else if (url.contains("youtu.be/")) {
+	            videoId = url.substring(url.indexOf("youtu.be/") + 9);
+	            int qIndex = videoId.indexOf("?");
+	            if (qIndex != -1) {
+	                videoId = videoId.substring(0, qIndex);
+	            }
+	            embedUrl = "https://www.youtube.com/embed/" + videoId;
+
+	        } else if (url.contains("youtube.com/shorts/")) {
+	            videoId = url.substring(url.indexOf("shorts/") + 7);
+	            int qIndex = videoId.indexOf("?");
+	            if (qIndex != -1) {
+	                videoId = videoId.substring(0, qIndex);
+	            }
+	            embedUrl = "https://www.youtube.com/embed/" + videoId;
+	        }
+
+	        if (embedUrl != null) {
+	%>
+	            <iframe width="560" height="315"
+	                    src="<%= embedUrl %>"
+	                    frameborder="0"
+	                    allowfullscreen>
+	            </iframe>
+	<%
+	        } else {
+	%>
+	            <p>URL：<a href="<%= url %>" target="_blank"><%= url %></a></p>
+	<%
+	        } // end of inner if-else
+	    } // end of outer if
+	%>
 		
 		<% String image = post.getImage();
 		if (image != null && (image.endsWith(".png") || image.endsWith(".jpg") || image.endsWith(".jpeg")))
