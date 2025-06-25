@@ -31,7 +31,7 @@
 		<h1>投稿フォーム入力ページ</h1>
 	</header>
 	<main>
- 		<p class="message"><c:out value="${message}"/></p>
+ 		<p class="message"><c:out value="${message}" escapeXml="false"/></p>
  		<p><a href="mypage">マイページへ</a></p>
 		<form action="post" method="post" enctype="multipart/form-data">   <!-- フォームの入れ子構造を改善 -->
 			<table border="1">
