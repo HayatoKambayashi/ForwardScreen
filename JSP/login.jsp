@@ -11,7 +11,7 @@
     <div class="login-container">
         <h1>ログイン</h1>
         <form action="login" method="post">
-            <label for="userName">ユーザーid:</label><br>
+            <label for="userName">ユーザーID:</label><br>
             <input type="text" id="userName" name="userId" required><br>
 
             <label for="password">パスワード:</label><br>
