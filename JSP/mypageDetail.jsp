@@ -79,6 +79,10 @@
 			<form action="mypage" method="get" class="mypage-button">
 				<button type="submit">マイページへ</button>
 			</form>
+			<form action="mypage" method="post" class="mypage-button" enctype="multipart/form-data" onsubmit="return confirm('本当に削除してよろしいですか？');">
+				<input type="hidden" name="postId" value="<%=postId%>">
+				<button type="submit" name="action" value="はい、削除します">削除</button>
+			</form>
 
 	</div>
 	</div>
