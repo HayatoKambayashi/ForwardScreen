@@ -58,7 +58,7 @@ function hideConfirm(postId) {
   %>
   
     <tr>
-      <th>投稿ID</th>
+      <th>投稿日時</th>
       <th>ジャンル</th>
       <th>コメント</th>
       <th>URL</th>
