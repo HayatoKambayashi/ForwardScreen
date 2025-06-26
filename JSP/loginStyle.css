@@ -10,16 +10,20 @@ body {
     flex-direction: column; /* 縦並びに変更 */
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+    min-height: 100vh
+/*    margin: 0 auto;*/
+	}
 
 /* ヘッダー画像のスタイル */
 .login-header-image {
     display: block;
-    margin: 2px auto 100px auto;
-    width: 300px !important; /* 横幅の最大サイズを指定 */
+    margin: 2% auto 5% auto;
+    
+	width: 30%; /* 横幅の最大サイズを指定 */
+	max-width: 300px;
+	min-width: 100px;
     height: auto;     /* 高さは自動調整 */
+
 
 }
 
@@ -31,7 +35,8 @@ body {
     padding: 30px 40px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 70vh;
+    width: 30%;
+	min-width: 300px;
 	margin: 0 auto; /* 中央揃え */
 	box-sizing: border-box;
 	}
@@ -121,7 +126,3 @@ button[type="submit"]:hover {
 	justify-content:center;
 	box-sizing: border-box;
 }
-
-
-
-
