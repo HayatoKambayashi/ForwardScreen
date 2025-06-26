@@ -150,7 +150,10 @@ public class LoginController extends HttpServlet {
 					// 取得したユーザ情報をセッションスコープに登録する。
 					HttpSession session = request.getSession();
 					session.setAttribute("loginUser", user);
-					request.getRequestDispatcher("/main.jsp").forward(request, response);
+					
+					// forwardじゃなくてsendRedirectにすることで、メイン画面の初期画面表示でおすすめ投稿が表示されるように変更しました。
+//					request.getRequestDispatcher("/main.jsp").forward(request, response);
+					response.sendRedirect("maincontroller");
 					return;
 				}
 			}
