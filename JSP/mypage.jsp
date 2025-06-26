@@ -68,7 +68,8 @@ function hideConfirm(postId) {
       <th>コメント</th>
       <th>URL</th>
       <th>画像</th>
-      <th>操作</th>
+      <th class="col-mypSousa">操作</th>
+      <th class="col-mypHiddenSousa"></th>
     </tr>
   </thead>
   <tbody>
@@ -111,6 +112,8 @@ if (list.size() > 0) {
 		  <form class="remove-button">
 		  <button type="button" onclick="showConfirm(<%=post.getPostId()%>)">削除</button>
 		  </form>
+		</td>
+		<td>
 		  <!-- 確認エリア（初期は非表示） -->
 		  <div id="confirm-<%=post.getPostId()%>" style="display: none; margin-top: 5px;">
 		    <form action="mypage" method="post" style="display: inline;">
