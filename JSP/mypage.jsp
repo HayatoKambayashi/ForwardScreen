@@ -94,7 +94,13 @@ if (list.size() > 0) {
 
         <td><%= genreName %></td>
         <td><%=post.getSource() %></td>
+        <%
+        	if (post.getUrl().length() <= 50) {
+        %>
         <td><a href="<%=post.getUrl() %>"><%=post.getUrl() %></a></td>
+        <% } else { %>
+       	<td><a href="<%=post.getUrl() %>"><%=post.getUrl().substring(0,36) + "…" %></a></td>
+       	<% } %>
         <td> <!-- 画像系表示のための追加要素 -->     	
 		 <% String image = post.getImage(); %>
 		<% if (image != null && (image.endsWith(".png") || image.endsWith(".jpg") || image.endsWith(".jpeg"))) { %>
