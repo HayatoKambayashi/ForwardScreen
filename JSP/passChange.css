@@ -1,0 +1,140 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+1p');
+
+/* 全体の背景と中央揃え */
+/* 全体の背景と縦並びレイアウト */
+body {
+    background-color: #719bad;
+    font-family: 'M PLUS 1p', sans-serif;
+    display: flex;
+    flex-direction: column; /* 縦並びに変更 */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* ヘッダー画像のスタイル */
+.login-header-image {
+    display: block;
+    margin: 2px auto 100px auto;
+    width: 300px !important; /* 横幅の最大サイズを指定 */
+    height: auto;     /* 高さは自動調整 */
+
+}
+
+
+
+/* ログインフォームの枠 */
+.login-container {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 70vh;
+	margin: 0 auto; /* 中央揃え */
+	box-sizing: border-box;
+	}
+	
+	
+
+/* タイトル */
+.login-container h2 {
+    margin-bottom: 20px;
+/*    text-align: center;*/
+	color: #715c1f;  /* 少し暗めの茶色*/
+}
+
+a {
+	color: #4f72ff;
+    display: inline-block;
+    margin-top: 16px;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* ラベルと入力欄 */
+label {
+	width: 100%;
+	text-align: left;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #917347;
+	display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0 auto; /* 中央寄せ */
+		box-sizing: border-box;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 62%;
+    padding: 10px;
+    margin-bottom: 18px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+	display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0 auto; /* 中央寄せ */
+		box-sizing: border-box;
+	
+}
+
+/* ユーザー名表示 */
+.userName {
+	margin: 10px 0;
+	font-size: 17px;
+    color: #917343;
+    font-weight: bold;
+}
+
+/* 情報メッセージ */
+p {
+    margin: 10px 0;
+    font-size: 14px;
+    color: red;
+}
+
+/* ログインボタン */
+form {
+
+	color:#917343;
+	display: center;
+	justify-content:center;
+	align-items: center;
+}
+
+button[type="submit"] {
+    width: 40%;
+    padding: 10px;
+    background-color: #917347;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+button[type="submit"]:hover {
+    background-color: #917347;
+	display: center;
+	justify-content:center;
+	box-sizing: border-box;
+}
