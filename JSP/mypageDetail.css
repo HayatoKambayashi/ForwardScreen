@@ -1,0 +1,142 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+1p');
+/* 全体の背景と中央揃え */
+body {
+    background-color: #719bad;
+    font-family: 'M PLUS 1p', sans-serif;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+
+}
+
+.container {
+    background-color: #ffffff;
+	justify-content: center;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+	display: inline-block; /* テーブルの幅に合わせて縮む */
+	max-width: 1000px;
+	box-sizing: border-box;
+	margin: 0 auto; 
+}
+
+/* タイトル */
+h1 {
+    margin-top: 0;
+    color: #917347;
+}
+
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-top: 20px;
+	box-sizing: border-box;
+	margin: 0 auto; 
+  }
+  
+  .col-mypSousa {width: 4.5em;}
+  .col-mypHiddenSousa {width:7em;}
+  
+  th, td {
+	height: 3.75em;
+	justify-content: center;
+    padding: 11px 11px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+  }
+
+  th {
+    background-color: rgb(0, 63, 140);
+    color: white;
+    font-weight: bold;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  img {
+      max-width: 300px;       /* 横幅の最大値を指定 */
+      height: auto;           /* 高さは自動調整でアスペクト比を維持 */
+      border-radius: 4px;
+      display: block;
+      margin: 10px auto;      /* 中央揃えと上下余白 */
+  }
+
+  
+  video.img {
+      max-width: 700px;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+      margin: 10px auto;
+  }
+
+  input[type="submit"] {
+    background-color: rgb(168, 74, 67);
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: rgb(135, 61, 54);
+  }
+
+  form {
+    margin: 0;
+	padding-bottom: 11px; 
+  }
+  
+  /* 削除ボタン */
+  .remove-button button {
+	  background-color: #a84a43;
+	      color: white;
+	      padding: 6px 12px;
+		  margin: 6px 1px 1px;
+	      border: none;
+	      border-radius: 4px;
+	      cursor: pointer;
+  }
+
+  .remove-button button:hover {
+      background-color: #a84a43;
+      color: rgb(255, 255, 255);
+  }
+  
+  input[type="button"] {
+	  margin-bottom: 200px;
+      background-color: rgb(168, 74, 67);
+      color: white;
+/*      padding: 6px 12px;*/
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type="button"]:hover {
+      background-color: rgb(135, 61, 54);
+    }
+	
+	
+  
+  h3 {
+    color: rgb(255, 255, 255);
+    margin-bottom: 10px;
+  }
+  
+  
+  
+  
+  
