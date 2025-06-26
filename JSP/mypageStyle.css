@@ -47,10 +47,14 @@ h1 {
 	box-sizing: border-box;
 	margin: 0 auto; 
   }
-
+  
+  .col-mypSousa {width: 4.5em;}
+  .col-mypHiddenSousa {width:7em;}
+  
   th, td {
+	height: 3.75em;
 	justify-content: center;
-    padding: 12px 16px;
+    padding: 11px 11px;
     border-bottom: 1px solid #e0e0e0;
     text-align: center;
   }
@@ -85,7 +89,7 @@ h1 {
 
   form {
     margin: 0;
-	padding-bottom: 20px; 
+	padding-bottom: 11px; 
   }
   
   /* 削除ボタン */
@@ -93,6 +97,7 @@ h1 {
 	  background-color: rgb(128, 128, 128);
 	      color: white;
 	      padding: 6px 12px;
+		  margin: 6px 1px 1px;
 	      border: none;
 	      border-radius: 4px;
 	      cursor: pointer;
