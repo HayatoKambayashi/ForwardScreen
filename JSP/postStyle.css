@@ -32,15 +32,23 @@ main {
 
 table {
     width: 100%;
+	text-align: left;
     border-collapse: collapse;
     margin-bottom: 1em;
 }
 
-td {
+th {
 	color: #917347;
     padding: 12px;
     border: 1px solid #ddd;
     vertical-align: top;
+}
+
+td {
+	color:#595857;
+	padding: 12px;
+	border: 1px solid #ddd;
+	vertical-align: top;
 }
 
 input[type="text"],
