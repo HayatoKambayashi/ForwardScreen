@@ -103,7 +103,7 @@
 		<% } else if (image != null && image.endsWith(".gif")) { %>
 		  <img src="upload/<%= image %>" alt="GIF画像" class="img">
 		<% } else if (image != null && (image.endsWith(".mp4") || image.endsWith(".webm"))) { %>
-		  <video style="max-height: 60px; border-radius: 4px;" controls class="img">
+		  <video style="max-height: 200px; border-radius: 4px;" controls class="img">
 		    <source src="upload/<%= image %>" type="video/mp4">
 		  </video>
 		<% } %>
