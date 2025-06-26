@@ -12,12 +12,12 @@
 <head>
 <meta charset="UTF-8">
 <title>投稿内容ページ</title>
-<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="mypageDetail.css">
 </head>
 <body>
 <div class="wrapper">
     <div class="container">
-        <h2>投稿情報 投稿ID:<%= request.getParameter("pid") %></h2>
+        <h1>投稿情報 投稿ID:<%= request.getParameter("pid") %></h1>
 		<%
 			String postId = (String) request.getParameter("pid");
 			PostDao dao = new PostDao();
@@ -86,13 +86,11 @@
 	                    allowfullscreen>
 	            </iframe>
 	<%
-	        } else if (url.length() > 50) {
+	        } else {
 	%>
-	            <p>URL：<a href="<%= url %>" target="_blank"><%= url.substring(0, 36) + "…" %></a></p>
+	            <p>URL：<a href="<%= url %>" target="_blank"><%= url %></a></p>
 	<%
-	        } else { %>
-	            <p>URL：<a href="<%= url %>" target="_blank"><%= url%></a></p>
-	<%     } // end of inner if-else
+	        } // end of inner if-else
 	    } // end of outer if
 	%>
 		
@@ -103,19 +101,18 @@
 		<% } else if (image != null && image.endsWith(".gif")) { %>
 		  <img src="upload/<%= image %>" alt="GIF画像" class="img">
 		<% } else if (image != null && (image.endsWith(".mp4") || image.endsWith(".webm"))) { %>
-		  <video style="max-height: 200px; border-radius: 4px;" controls class="video.img">
+		  <video style="max-height: 200px; border-radius: 10px;" controls class="video.img">
 		    <source src="upload/<%= image %>" type="video/mp4">
 		  </video>
 		<% } %>
 
-			<form action="mypage" method="get" class="mypage-button">
+			<form action="mypage" method="get" class="remove-button">
 				<button type="submit">マイページへ</button>
 			</form>
-			<form action="mypage" method="post" class="mypage-button" enctype="multipart/form-data" onsubmit="return confirm('本当に削除してよろしいですか？');">
+			<form action="mypage" method="post" class="remove-button" enctype="multipart/form-data" onsubmit="return confirm('本当に削除してよろしいですか？');">
 				<input type="hidden" name="postId" value="<%=postId%>">
 				<button type="submit" name="action" value="はい、削除します">削除</button>
 			</form>
-
 	</div>
 	</div>
 </body>
