@@ -99,9 +99,13 @@ input[type="password"] {
 
 /* 情報メッセージ */
 p {
-    margin: 10px 0;
+    margin: 30px 5px;
     font-size: 14px;
     color: red;
+	text-align: center;
+/*	margin-top: 10px;*/
+/*	margin-bottom: 5px;*/
+
 }
 
 /* ログインボタン */
@@ -126,15 +130,11 @@ button[type="submit"] {
     transition: background-color 0.3s ease;
     display: block;
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;
 }
-
-
-
-
 
 
 button[type="submit"]:hover {
@@ -143,3 +143,4 @@ button[type="submit"]:hover {
 	justify-content:center;
 	box-sizing: border-box;
 }
+
