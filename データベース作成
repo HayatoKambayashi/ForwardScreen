@@ -46,8 +46,8 @@ INSERT INTO user (userName) VALUES ('蒲原陸亜');
 
 -- 投稿テーブルにレコードを追加
 INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100001', 'Automatic', 'https://www.youtube.com/watch?v=-9DxpPiE458', 'm', TRUE);
-INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100002', '祝宴の夜に', '', 'bg', FALSE);
-INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100003', '吾輩は猫である', '', 'bk', FALSE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100001', '祝宴の夜に', '', 'bg', FALSE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100000', '吾輩は猫である', '', 'bk', TRUE);
 
 -- ジャンルテーブルにレコードを追加
 INSERT INTO genre VALUES ('m', '音楽');
@@ -58,12 +58,12 @@ INSERT INTO genre VALUES ('bk', '本');
 
 // 投稿テーブルにもっとデータ追加したい場合(せっかく書いたので)
 // ※各人のローカルで初めてデータベースを作成するとき(DB作成テスト時)は以下のデータは追加しない
-INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100002', '斜陽', '', 'bk', TRUE);
-INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100006', '夜に駆ける', '', 'm', FALSE);
-INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100005', 'ラマダカタブラ', '', 'bg', FALSE);
-INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100007', 'トドメダン', '', 'bg', TRUE);
-INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100002', 'きらり', '', 'm', TRUE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100000', '斜陽', '', 'bk', TRUE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100000', '夜に駆ける', '', 'm', TRUE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100000', 'ラマダカタブラ', '', 'bg', TRUE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100001', 'トドメダン', '', 'bg', TRUE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100001', 'きらり', '', 'm', TRUE);
 INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100001', '海と毒薬', '', 'bk', TRUE);
-INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100006', 'クラウンソード', '', 'bg', TRUE);
-INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100006', '大きな古時計', '', 'm', FALSE);
-INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100007', 'はらぺこあおむし', '', 'bk', TRUE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100000', 'クラウンソード', '', 'bg', TRUE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100000', '大きな古時計', '', 'm', TRUE);
+INSERT INTO post (userId, source, url, genreCd, anonyFlag) VALUES ('100000', 'はらぺこあおむし', '', 'bk', TRUE);
