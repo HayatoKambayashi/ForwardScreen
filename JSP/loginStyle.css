@@ -31,7 +31,7 @@ body {
     padding: 30px 40px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 100vh;
+    width: 70vh;
 	margin: 0 auto; /* 中央揃え */
 	box-sizing: border-box;
 	}
@@ -56,18 +56,26 @@ label {
     margin-bottom: 5px;
     font-weight: bold;
     color: #917347;
+	display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0 auto; /* 中央寄せ */
+		box-sizing: border-box;
 }
 
 input[type="text"],
 input[type="password"] {
-    width: 100%;
+    width: 62%;
     padding: 10px;
     margin-bottom: 18px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    box-sizing: border-box;
     font-size: 14px;
-	box-sizing: border-box;
+	display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0 auto; /* 中央寄せ */
+		box-sizing: border-box;
 	
 }
 
@@ -113,3 +121,7 @@ button[type="submit"]:hover {
 	justify-content:center;
 	box-sizing: border-box;
 }
+
+
+
+
