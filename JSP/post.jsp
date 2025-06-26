@@ -27,8 +27,6 @@
 
 
 <body>
-<div class="message">
-
 
 	<header>
 		<h1>投稿フォーム入力ページ</h1>
@@ -39,7 +37,7 @@
 		<form action="post" method="post" enctype="multipart/form-data">   <!-- フォームの入れ子構造を改善 -->
 		<table border="1">
 				<tr>
-					<td>ジャンル</td>
+					<th>ジャンル</th>
 					<td>
 					<select name="genreCd" >
 					  <c:forEach var="genre" items="${allGenreList}">
@@ -60,23 +58,23 @@
 					}
 				%>
 				<tr>
-					<td>コメント</td>
+					<th>コメント</th>
 					<td><textarea name="source"><%=source%></textarea></td>
 				</tr>
 				<tr>
-					<td>画像</td>
+					<th>画像</th>
 					<td>
 					<p><input type="file" name="image"></p>
 				
 				</td>
 				</tr>
 				<tr>
-					<td>url</td>
+					<th>url</th>
 					<td><input type="text" name="url" value="<%= url %>"/>
 					</td>
 				</tr>
 				<tr>
-					<td>匿名で投稿しますか？</td>
+					<th>匿名で投稿しますか？</th>
 					<td>
 						<label>
 						<input type="checkbox" name="anonyFlag" value="true"> Yes
