@@ -52,6 +52,10 @@
                 <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
             </div>
         </c:when>
+        <c:when test="${fn:length(data.url) > 50}">
+        	 <c:set var="shortUrl" value="${fn:substring(data.url, 0, 36)}" />
+        	 <p>URL: <a href="${data.url}" target="_blank">${shortUrl}…</a></p>
+        </c:when>
         <c:otherwise>
             <p>URL: <a href="${data.url}" target="_blank">${data.url}</a></p>
         </c:otherwise>
@@ -76,11 +80,11 @@
     </c:choose>
 
     <div class="button-group">
+    	<form action="post" method="get" class="post-button">
+            <button type="submit">投稿入力画面へ</button>
+        </form>
         <form action="maincontroller" method="get" class="button">
             <button type="submit">投稿を表示</button>
-        </form>
-        <form action="post" method="get" class="post-button">
-            <button type="submit">投稿入力画面へ</button>
         </form>
         <form action="mypage" method="get" class="mypage-button">
             <button type="submit">マイページへ</button>
