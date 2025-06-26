@@ -99,7 +99,6 @@ public class PostController extends HttpServlet{
 				PostDto postDto = new PostDto();
 				
 				
-				//ここから
 				//imageの定義方法を変更。jspからファイル名を獲得する。データベースにはファイル名を保存する
 				Part part = request.getPart("image");
 				String image;
@@ -133,10 +132,7 @@ public class PostController extends HttpServlet{
 				} else {
 					image = null; 
 				}
-				//ここまで
 				
-				
-
 				if (genreCd != null && !genreCd.isEmpty()
 					&& ((source != null && !source.isEmpty())|| 
 						(image != null && !image.isEmpty()) ||
@@ -161,7 +157,11 @@ public class PostController extends HttpServlet{
 						request.setAttribute("message", "投稿が完了しました。<a href=\"mypageDetail.jsp?pid="
 								+ currentPost.getPostId() + "\">画像や動画のプレビューはこちら</a>");
 					}else {
+						if (url.length() > 300) {
+							request.setAttribute("message", "urlが長すぎます。");
+						} else {
 						request.setAttribute("message", "投稿に失敗しました。");
+						}
 					} // 
 				}else {
 					request.setAttribute("message", "いずれかの項目を入力してください");
