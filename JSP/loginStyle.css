@@ -10,20 +10,16 @@ body {
     flex-direction: column; /* 縦並びに変更 */
     justify-content: center;
     align-items: center;
-    min-height: 100vh
-/*    margin: 0 auto;*/
-	}
+    height: 100vh;
+    margin: 0;
+}
 
 /* ヘッダー画像のスタイル */
 .login-header-image {
     display: block;
-    margin: 2% auto 5% auto;
-    
-	width: 30%; /* 横幅の最大サイズを指定 */
-	max-width: 300px;
-	min-width: 100px;
+    margin: 2px auto 100px auto;
+    width: 300px !important; /* 横幅の最大サイズを指定 */
     height: auto;     /* 高さは自動調整 */
-
 
 }
 
@@ -35,18 +31,17 @@ body {
     padding: 30px 40px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 30%;
-	min-width: 300px;
+    width: 70vh;
 	margin: 0 auto; /* 中央揃え */
 	box-sizing: border-box;
 	}
 	
 
 /* タイトル */
-.login-container h1 {
+.login-container h2 {
     margin-bottom: 20px;
-    text-align: center;
-	color: #917347;
+/*    text-align: center;*/
+	color: #715c1f;  /* 少し暗めの茶色*/
 }
 
 
@@ -82,6 +77,14 @@ input[type="password"] {
 		margin: 0 auto; /* 中央寄せ */
 		box-sizing: border-box;
 	
+}
+
+/* ユーザー名表示 */
+.userName {
+	margin: 10px 0;
+	font-size: 14px;
+    color: #917343;
+    font-weight: bold;
 }
 
 /* 情報メッセージ */
@@ -126,3 +129,6 @@ button[type="submit"]:hover {
 	justify-content:center;
 	box-sizing: border-box;
 }
+
+
+
