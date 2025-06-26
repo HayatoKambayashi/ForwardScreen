@@ -41,10 +41,11 @@
             <input type="password" id="currentPassword" name="password" required>
             <label for="checkCurrentPassword">新規パスワード確認:</label>
             <input type="password" id="checkCurrentPassword" name="checkPassword" required>
-            <input type="submit" value="変更する">
+            <button type="submit" value="変更する">変更する</button>
         </form>
-        <form action="${pageContext.request.contextPath}/logout" method="get">
-    		<button type="submit" value="ログイン画面へ戻る">ログイン画面へ戻る</button>
+<!--        <form action="${pageContext.request.contextPath}/logout" method="get">-->
+<!--    		<button type="submit" value="ログイン画面へ戻る">ログイン画面へ戻る</button>-->
+    		<p><a href="login">ログイン画面へ戻る</a></p>
 		</form>
     </div>
 </body>
