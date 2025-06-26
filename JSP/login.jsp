@@ -7,11 +7,15 @@
     <title>ログインページ</title>
 <link rel="stylesheet" href="loginStyle.css">
 </head>
+
+<img src="logo.jpeg" alt="Login Header Image" class="login-header-image">
+
 <body>
     <div class="login-container">
-        <h1>ログイン</h1>
+    
+<!--        <h1>ログイン</h1>-->
         <form action="login" method="post">
-            <label for="userName">ユーザーID:</label><br>
+            <label for="userName">ユーザーid:</label><br>
             <input type="text" id="userName" name="userId" required><br>
 
             <label for="password">パスワード:</label><br>
