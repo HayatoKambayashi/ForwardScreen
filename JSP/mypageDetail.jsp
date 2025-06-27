@@ -86,11 +86,12 @@
 	                    allowfullscreen>
 	            </iframe>
 	<%
-	        } else {
-	%>
-	            <p>URL：<a href="<%= url %>" target="_blank"><%= url %></a></p>
+	                } else if (url.length() > 50) %>
+	            <p>URL：<a href="<%= url %>" target="_blank"><%= url.substring(0, 36) + "…" %></a></p>
 	<%
-	        } // end of inner if-else
+	        } else { %>
+	            <p>URL：<a href="<%= url %>" target="_blank"><%= url%></a></p>
+	<%     } // end of inner if-else
 	    } // end of outer if
 	%>
 		
