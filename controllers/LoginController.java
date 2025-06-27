@@ -86,8 +86,9 @@ public class LoginController extends HttpServlet {
 				} else {
 				// ここまで
 				userDao.updatePassword(inputPass, inputUser);
-				request.getRequestDispatcher("/main.jsp").forward(request, response);
+//				request.getRequestDispatcher("/main.jsp").forward(request, response);
 				// mainに遷移する。
+				response.sendRedirect("maincontroller");
 				return;
 				}
 				
