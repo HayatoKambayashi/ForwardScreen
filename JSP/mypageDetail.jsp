@@ -85,21 +85,12 @@
 	                    frameborder="0"
 	                    allowfullscreen>
 	            </iframe>
-	if (embedUrl != null) {
-	%>
-	            <iframe width="560" height="315"
-	                    src="<%= embedUrl %>"
-	                    frameborder="0"
-	                    allowfullscreen>
-	            </iframe>
 	<%
-	        } else if (url.length() > 50) {
+	        } else {
 	%>
-	            <p>URL：<a href="<%= url %>" target="_blank"><%= url.substring(0, 36) + "…" %></a></p>
+	            <p>URL：<a href="<%= url %>" target="_blank"><%= url %></a></p>
 	<%
-	        } else { %>
-	            <p>URL：<a href="<%= url %>" target="_blank"><%= url%></a></p>
-	<%     } // end of inner if-else
+	        } // end of inner if-else
 	    } // end of outer if
 	%>
 		
