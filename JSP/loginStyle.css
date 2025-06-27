@@ -17,8 +17,8 @@ body {
 /* ヘッダー画像のスタイル */
 .login-header-image {
     display: block;
-    margin: 2px auto 100px auto;
-    width: 300px !important; /* 横幅の最大サイズを指定 */
+    margin: 10px auto 40px auto;
+    width: 200px !important; /* 横幅の最大サイズを指定 */
     height: auto;     /* 高さは自動調整 */
 
 }
@@ -28,8 +28,8 @@ body {
 /* ログインフォームの枠 */
 .login-container {
     background-color: #ffffff;
-    padding: 30px 40px;
-    border-radius: 10px;
+    padding: 15px 40px;
+    border-radius: 1px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     width: 70vh;
 	margin: 0 auto; /* 中央揃え */
@@ -143,4 +143,3 @@ button[type="submit"]:hover {
 	justify-content:center;
 	box-sizing: border-box;
 }
-
