@@ -47,53 +47,48 @@
 			{ %>
 		<p>コメント：<%= post.getSource() %></p>
 		<% } %>
-		<%
-	    String url = post.getUrl();
-	    if (url != null && !url.trim().isEmpty()) {
-	        String videoId = null;
-	        String embedUrl = null;
+<%
+    String url = post.getUrl();
+    if (url != null && !url.trim().isEmpty()) {
+        String videoId = null;
+        String embedUrl = null;
 
-	        if (url.contains("youtube.com/watch?v=")) {
-	            videoId = url.substring(url.indexOf("v=") + 2);
-	            int ampIndex = videoId.indexOf("&");
-	            if (ampIndex != -1) {
-	                videoId = videoId.substring(0, ampIndex);
-	            }
-	            embedUrl = "https://www.youtube.com/embed/" + videoId;
+        if (url.contains("youtube.com/watch?v=")) {
+            videoId = url.substring(url.indexOf("v=") + 2);
+            int ampIndex = videoId.indexOf("&");
+            if (ampIndex != -1) {
+                videoId = videoId.substring(0, ampIndex);
+            }
+            embedUrl = "https://www.youtube.com/embed/" + videoId;
 
-	        } else if (url.contains("youtu.be/")) {
-	            videoId = url.substring(url.indexOf("youtu.be/") + 9);
-	            int qIndex = videoId.indexOf("?");
-	            if (qIndex != -1) {
-	                videoId = videoId.substring(0, qIndex);
-	            }
-	            embedUrl = "https://www.youtube.com/embed/" + videoId;
+        } else if (url.contains("youtu.be/")) {
+            videoId = url.substring(url.indexOf("youtu.be/") + 9);
+            int qIndex = videoId.indexOf("?");
+            if (qIndex != -1) {
+                videoId = videoId.substring(0, qIndex);
+            }
+            embedUrl = "https://www.youtube.com/embed/" + videoId;
 
-	        } else if (url.contains("youtube.com/shorts/")) {
-	            videoId = url.substring(url.indexOf("shorts/") + 7);
-	            int qIndex = videoId.indexOf("?");
-	            if (qIndex != -1) {
-	                videoId = videoId.substring(0, qIndex);
-	            }
-	            embedUrl = "https://www.youtube.com/embed/" + videoId;
-	        }
+        } else if (url.contains("youtube.com/shorts/")) {
+            videoId = url.substring(url.indexOf("shorts/") + 7);
+            int qIndex = videoId.indexOf("?");
+            if (qIndex != -1) {
+                videoId = videoId.substring(0, qIndex);
+            }
+            embedUrl = "https://www.youtube.com/embed/" + videoId;
+        }
+%>
+<% if (embedUrl != null) { %>
+    <iframe width="560" height="315"
+            src="<%= embedUrl %>"
+            frameborder="0"
+            allowfullscreen></iframe>
+<% } else if (url.length() > 50) { %>
+    <p>URL：<a href="<%= url %>" target="_blank"><%= url.substring(0, 36) + "…" %></a></p>
+<% } else { %>
+    <p>URL：<a href="<%= url %>" target="_blank"><%= url %></a></p>
+<% } } %>
 
-	        if (embedUrl != null) {
-	%>
-	            <iframe width="560" height="315"
-	                    src="<%= embedUrl %>"
-	                    frameborder="0"
-	                    allowfullscreen>
-	            </iframe>
-	<%
-	                } else if (url.length() > 50) %>
-	            <p>URL：<a href="<%= url %>" target="_blank"><%= url.substring(0, 36) + "…" %></a></p>
-	<%
-	        } else { %>
-	            <p>URL：<a href="<%= url %>" target="_blank"><%= url%></a></p>
-	<%     } // end of inner if-else
-	    } // end of outer if
-	%>
 		
 		<% String image = post.getImage();
 		if (image != null && (image.endsWith(".png") || image.endsWith(".jpg") || image.endsWith(".jpeg")))
