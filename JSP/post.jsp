@@ -62,7 +62,7 @@
 					<td><textarea name="source"><%=source%></textarea></td>
 				</tr>
 				<tr>
-					<th>画像</th>
+					<th>画像／動画</th>
 					<td>
 					<p><input type="file" name="image"></p>
 				
