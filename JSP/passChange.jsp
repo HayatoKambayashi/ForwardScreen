@@ -22,8 +22,8 @@
     <div class="login-container">
         <h2>パスワード変更</h2>
         
-	<form action="${pageContext.request.contextPath}/maincontroller" method="post">
-<!--        <form action="login" method="post">-->
+<!--		<form action="${pageContext.request.contextPath}/maincontroller" method="post">-->
+        <form action="login" method="post">
         <input type="hidden" name="id" value="1"> 
         
         <%-- userNameを表示 --%>
